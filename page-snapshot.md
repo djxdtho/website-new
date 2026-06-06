@@ -1,0 +1,510 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e6]:
+    - generic [ref=e7]: AA
+    - generic [ref=e8]:
+      - button [ref=e566]:
+        - img [ref=e10]
+      - button [ref=e13]:
+        - img [ref=e14]
+      - button [ref=e19]:
+        - img [ref=e20]
+      - button [ref=e22]:
+        - img [ref=e23]
+      - button [ref=e25]:
+        - img [ref=e26]
+      - button "Pricing" [ref=e568]:
+        - img [ref=e30]
+        - generic [ref=e569]: Pricing
+  - generic [ref=e32]:
+    - generic:
+      - heading "AA Elements" [level=1]
+      - paragraph: Abdurrahman Ali
+      - paragraph:
+        - generic: Pixel-perfect experie|
+      - generic [ref=e35]:
+        - link "View Work" [ref=e36] [cursor=pointer]:
+          - /url: "#about"
+        - link "Let's Talk" [ref=e37] [cursor=pointer]:
+          - /url: "#about"
+  - generic [ref=e40]:
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - generic [ref=e43]: •
+        - generic [ref=e44]:
+          - text: React
+          - generic: Component-based UI library
+      - generic [ref=e45]:
+        - generic [ref=e46]: •
+        - generic [ref=e47]:
+          - text: TypeScript
+          - generic: Typed JavaScript superset
+      - generic [ref=e48]:
+        - generic [ref=e49]: •
+        - generic [ref=e50]:
+          - text: UI/UX Design
+          - generic: Interface & experience design
+      - generic [ref=e51]:
+        - generic [ref=e52]: •
+        - generic [ref=e53]:
+          - text: WebGL
+          - generic: Browser 3D graphics API
+      - generic [ref=e54]:
+        - generic [ref=e55]: •
+        - generic [ref=e56]:
+          - text: Figma
+          - generic: Collaborative design tool
+      - generic [ref=e57]:
+        - generic [ref=e58]: •
+        - generic [ref=e59]:
+          - text: Tailwind CSS
+          - generic: Utility-first CSS framework
+      - generic [ref=e60]:
+        - generic [ref=e61]: •
+        - generic [ref=e62]:
+          - text: Three.js
+          - generic: 3D library for WebGL
+    - generic [ref=e63]:
+      - generic [ref=e64]:
+        - generic [ref=e65]: •
+        - generic [ref=e66]:
+          - text: React
+          - generic: Component-based UI library
+      - generic [ref=e67]:
+        - generic [ref=e68]: •
+        - generic [ref=e69]:
+          - text: TypeScript
+          - generic: Typed JavaScript superset
+      - generic [ref=e70]:
+        - generic [ref=e71]: •
+        - generic [ref=e72]:
+          - text: UI/UX Design
+          - generic: Interface & experience design
+      - generic [ref=e73]:
+        - generic [ref=e74]: •
+        - generic [ref=e75]:
+          - text: WebGL
+          - generic: Browser 3D graphics API
+      - generic [ref=e76]:
+        - generic [ref=e77]: •
+        - generic [ref=e78]:
+          - text: Figma
+          - generic: Collaborative design tool
+      - generic [ref=e79]:
+        - generic [ref=e80]: •
+        - generic [ref=e81]:
+          - text: Tailwind CSS
+          - generic: Utility-first CSS framework
+      - generic [ref=e82]:
+        - generic [ref=e83]: •
+        - generic [ref=e84]:
+          - text: Three.js
+          - generic: 3D library for WebGL
+  - generic [ref=e86]:
+    - generic [ref=e88]: AA
+    - generic [ref=e89]:
+      - text: About
+      - heading "Who I Am" [level=2] [ref=e90]
+      - generic [ref=e91]:
+        - paragraph [ref=e92]: "I'm Abdurrahman Ali — a 17-year-old self-taught web designer and developer from Nigeria. My journey started with pure curiosity: the desire to take something in my head and make it real on a screen."
+        - paragraph [ref=e93]: What began as tinkering with HTML and CSS in a text editor quickly became an obsession. I dove into JavaScript, then React, then the entire modern front-end ecosystem — not through courses or bootcamps, but through building things. Breaking them. Fixing them. Making them better.
+        - paragraph [ref=e94]:
+          - text: I specialize in modern, immersive digital experiences — blending clean design, smooth interactions, and thoughtful storytelling. Every project I ship has soul. I believe the best websites are the ones you
+          - emphasis [ref=e95]: feel
+          - text: ", not just see."
+        - blockquote [ref=e98]: “Small businesses deserve great websites too. I make that possible at accessible price points without ever compromising on quality. Every business — no matter how small — deserves a web presence that looks professional, loads fast, and converts visitors.”
+        - paragraph [ref=e99]: "My approach is simple: listen first, design second, build third. I don't just write code — I solve problems. Whether it's a landing page for a local business or a full-stack web app, I bring the same level of care, attention, and craftsmanship."
+        - paragraph [ref=e100]: Driven by a passion for UI/UX, interaction design, and front-end engineering, I push the boundaries of what the web can feel like. Not pages — experiences.
+        - generic [ref=e101]:
+          - generic [ref=e102]:
+            - generic [ref=e104]: "[ 01 ]"
+            - generic [ref=e105]: Timeline
+          - heading "My Journey" [level=3] [ref=e106]
+          - paragraph [ref=e107]: 2023 — 2026
+          - paragraph [ref=e108]: From first HTML tag to full-stack developer. Here's how it happened.
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - generic [ref=e111]: "2023"
+            - generic [ref=e112]: Discovered HTML & CSS — built first webpage
+          - generic [ref=e113]:
+            - generic [ref=e114]: "2024"
+            - generic [ref=e115]: Learned JavaScript, React, built multiple projects
+          - generic [ref=e116]:
+            - generic [ref=e117]: "2025"
+            - generic [ref=e118]: Mastered TypeScript, Tailwind, started freelancing
+          - generic [ref=e119]:
+            - generic [ref=e120]: "2026"
+            - generic [ref=e121]: Full-stack, WebGL, 3D — pushing the boundaries
+        - generic [ref=e122]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: 2+
+            - generic [ref=e125]: Years Coding
+          - generic [ref=e126]:
+            - generic [ref=e127]: 15+
+            - generic [ref=e128]: Projects Built
+          - generic [ref=e129]:
+            - generic [ref=e130]: 8+
+            - generic [ref=e131]: Happy Clients
+          - generic [ref=e132]:
+            - generic [ref=e133]: 100%
+            - generic [ref=e134]: Self-taught
+  - generic [ref=e136]:
+    - generic [ref=e137]: "[ 02 ] Capabilities"
+    - heading "What I Offer" [level=2] [ref=e138]
+    - paragraph [ref=e139]: Services I provide — from code to design to strategy.
+    - generic [ref=e140]:
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]: "[01]"
+          - generic [ref=e144]: Develop
+          - generic [ref=e145]: "->"
+        - heading "Full-Stack Web Development" [level=3] [ref=e146]
+        - paragraph [ref=e147]: From concept to deployment
+        - generic [ref=e148]:
+          - generic [ref=e149]: React
+          - generic [ref=e150]: Next.js
+          - generic [ref=e151]: TypeScript
+          - generic [ref=e152]: Tailwind
+          - generic [ref=e153]: Node.js
+        - link "Start a project →" [ref=e154] [cursor=pointer]:
+          - /url: "#"
+          - text: Start a project
+          - generic [ref=e155]: →
+      - generic [ref=e156]:
+        - generic [ref=e157]:
+          - generic [ref=e158]: "[02]"
+          - generic [ref=e159]: Design
+          - generic [ref=e160]: "->"
+        - heading "UI/UX & Visual Design" [level=3] [ref=e161]
+        - paragraph [ref=e162]: Interfaces that feel right
+        - generic [ref=e163]:
+          - generic [ref=e164]: Figma
+          - generic [ref=e165]: Spline
+          - generic [ref=e166]: Prototyping
+          - generic [ref=e167]: Brand Identity
+          - generic [ref=e168]: Motion
+        - link "Discuss your vision →" [ref=e169] [cursor=pointer]:
+          - /url: "#"
+          - text: Discuss your vision
+          - generic [ref=e170]: →
+      - generic [ref=e171]:
+        - generic [ref=e172]:
+          - generic [ref=e173]: "[03]"
+          - generic [ref=e174]: Create
+          - generic [ref=e175]: "->"
+        - heading "Interactive Experiences" [level=3] [ref=e176]
+        - paragraph [ref=e177]: Web you can feel
+        - generic [ref=e178]:
+          - generic [ref=e179]: 3D Web
+          - generic [ref=e180]: WebGL
+          - generic [ref=e181]: Animation
+          - generic [ref=e182]: Creative Coding
+          - generic [ref=e183]: GSAP
+        - link "Build something cool →" [ref=e184] [cursor=pointer]:
+          - /url: "#"
+          - text: Build something cool
+          - generic [ref=e185]: →
+      - generic [ref=e186]:
+        - generic [ref=e187]:
+          - generic [ref=e188]: "[04]"
+          - generic [ref=e189]: Consult
+          - generic [ref=e190]: "->"
+        - heading "Technical Consultation" [level=3] [ref=e191]
+        - paragraph [ref=e192]: Strategy & architecture
+        - generic [ref=e193]:
+          - generic [ref=e194]: Code Review
+          - generic [ref=e195]: Architecture
+          - generic [ref=e196]: Performance
+          - generic [ref=e197]: Accessibility
+        - link "Let's talk shop →" [ref=e198] [cursor=pointer]:
+          - /url: "#"
+          - text: Let's talk shop
+          - generic [ref=e199]: →
+  - generic [ref=e201]:
+    - generic [ref=e202]:
+      - generic [ref=e203]:
+        - generic [ref=e204]:
+          - generic [ref=e206]: "[ 03 ]"
+          - generic [ref=e207]: Toolkit
+        - heading "My Toolkit" [level=2] [ref=e208]
+        - paragraph [ref=e209]: The technologies and tools I use to ship production-grade digital experiences.
+      - generic [ref=e510]:
+        - generic [ref=e523]: "!!!"
+        - generic [ref=e524]: "$$$$$$$*#; #$*##*!*=;;~~"
+        - generic [ref=e525]: $!!!#**##$$$!. !$$* $#!,~::;~~-..
+        - generic [ref=e526]: $#==,...-=*#$$**~ *$ ;.#! ..=-..--.....
+        - generic [ref=e527]: "#=;,.. .!*$#$;; $* .. ;............"
+        - generic [ref=e528]: "*!!!;!;==:=;;; $=$$#* .=-......;-....."
+        - generic [ref=e529]: $#=;!- ~,:. .*.;.;~,:-;~$*-$#..#=-# ..$$*=~:~.....
+        - generic [ref=e530]: $$#!=-~,,.-... .........,$:#-..=:..*..!*!#!!:,-..
+        - generic [ref=e531]: $$$#;~,.................$#$#..=:..;..$*!~, ...
+        - generic [ref=e532]: "$$#*=:...... $$!,.$$##,.=:. -.. !.$#*:"
+        - generic [ref=e533]: $#!;:-.... $$$$$*!.*=-..... *$$ .-.
+        - generic [ref=e534]: $$~,..~,.. **!*;=:=..... !$$#*;,
+        - generic [ref=e535]: $##*!;.... ;!;;:-... *$$#*=.
+        - generic [ref=e536]: "# !=;~,... ;$....-"
+        - generic [ref=e537]: "##*.. .~-.. #$$#=:."
+        - generic [ref=e538]: "*:,.*!=; .... *$$#*=.."
+        - generic [ref=e539]: "** ..=;~-. . *$$*!..-"
+        - generic [ref=e540]: "!-..!=... ;-, . !*##* =-"
+        - generic [ref=e541]: "=!!.. =;. :~ .- . : =!*#* =:.."
+        - generic [ref=e542]: ";, !.. ;; .: .: .:,;;;!.*! =;.-."
+        - generic [ref=e543]: ;=. == ..; . ;. ;. = = ;. ~ .
+        - generic [ref=e544]: ";; .; ..; . ;. ;. .: :~..."
+        - generic [ref=e545]: ": :; .:; . :. ~.. ~..."
+        - generic [ref=e546]: "~ -: .: ..- ..."
+        - generic [ref=e547]: ., .
+    - generic [ref=e212]:
+      - generic [ref=e213]:
+        - generic [ref=e214]:
+          - generic [ref=e215]: "[01]"
+          - generic [ref=e216]: Frontend
+        - heading "UI Engineering" [level=3] [ref=e217]
+        - generic [ref=e218]:
+          - link "ReactComponent architecture" [ref=e219] [cursor=pointer]:
+            - /url: https://react.dev
+            - generic [ref=e221]: ReactComponent architecture
+          - link "Next.jsFull-stack React" [ref=e222] [cursor=pointer]:
+            - /url: https://nextjs.org
+            - generic [ref=e224]: Next.jsFull-stack React
+          - link "TypeScriptType-safe code" [ref=e225] [cursor=pointer]:
+            - /url: https://typescriptlang.org
+            - generic [ref=e227]: TypeScriptType-safe code
+          - link "Tailwind CSSUtility-first CSS" [ref=e228] [cursor=pointer]:
+            - /url: https://tailwindcss.com
+            - generic [ref=e230]: Tailwind CSSUtility-first CSS
+          - link "Framer MotionAnimation" [ref=e231] [cursor=pointer]:
+            - /url: https://framer.com/motion
+            - generic [ref=e233]: Framer MotionAnimation
+          - link "Three.js3D graphics" [ref=e234] [cursor=pointer]:
+            - /url: https://threejs.org
+            - generic [ref=e236]: Three.js3D graphics
+      - generic [ref=e237]:
+        - generic [ref=e238]:
+          - generic [ref=e239]: "[02]"
+          - generic [ref=e240]: Design & Creative
+        - heading "Visual Craft" [level=3] [ref=e241]
+        - generic [ref=e242]:
+          - link "FigmaUI/UX design" [ref=e243] [cursor=pointer]:
+            - /url: https://figma.com
+            - generic [ref=e245]: FigmaUI/UX design
+          - link "Spline3D design" [ref=e246] [cursor=pointer]:
+            - /url: https://spline.design
+            - generic [ref=e248]: Spline3D design
+          - link "Blender3D modeling" [ref=e249] [cursor=pointer]:
+            - /url: https://blender.org
+            - generic [ref=e251]: Blender3D modeling
+          - link "PhotoshopImage editing" [ref=e252] [cursor=pointer]:
+            - /url: https://adobe.com/photoshop
+            - generic [ref=e254]: PhotoshopImage editing
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - generic [ref=e257]: "[03]"
+          - generic [ref=e258]: Languages
+        - heading "Core Languages" [level=3] [ref=e259]
+        - generic [ref=e260]:
+          - link "TypeScriptPrimary language" [ref=e261] [cursor=pointer]:
+            - /url: https://typescriptlang.org
+            - generic [ref=e263]: TypeScriptPrimary language
+          - link "JavaScriptES6+" [ref=e264] [cursor=pointer]:
+            - /url: https://developer.mozilla.org/en-US/docs/Web/JavaScript
+            - generic [ref=e266]: JavaScriptES6+
+          - link "PythonScripting & automation" [ref=e267] [cursor=pointer]:
+            - /url: https://python.org
+            - generic [ref=e269]: PythonScripting & automation
+          - link "HTML / CSSWeb fundamentals" [ref=e270] [cursor=pointer]:
+            - /url: https://developer.mozilla.org/en-US/docs/Web/HTML
+            - generic [ref=e272]: HTML / CSSWeb fundamentals
+          - link "SQLDatabases" [ref=e273] [cursor=pointer]:
+            - /url: https://en.wikipedia.org/wiki/SQL
+            - generic [ref=e275]: SQLDatabases
+      - generic [ref=e276]:
+        - generic [ref=e277]:
+          - generic [ref=e278]: "[04]"
+          - generic [ref=e279]: Tools & Infrastructure
+        - heading "The Stack" [level=3] [ref=e280]
+        - generic [ref=e281]:
+          - link "GitVersion control" [ref=e282] [cursor=pointer]:
+            - /url: https://git-scm.com
+            - generic [ref=e284]: GitVersion control
+          - link "VS CodeEditor" [ref=e285] [cursor=pointer]:
+            - /url: https://code.visualstudio.com
+            - generic [ref=e287]: VS CodeEditor
+          - link "VercelDeployment" [ref=e288] [cursor=pointer]:
+            - /url: https://vercel.com
+            - generic [ref=e290]: VercelDeployment
+          - link "LinuxTerminal & servers" [ref=e291] [cursor=pointer]:
+            - /url: https://linux.org
+            - generic [ref=e293]: LinuxTerminal & servers
+          - link "PostmanAPI testing" [ref=e294] [cursor=pointer]:
+            - /url: https://postman.com
+            - generic [ref=e296]: PostmanAPI testing
+  - generic [ref=e298]:
+    - generic [ref=e299]: "[ 04 ] Journey"
+    - heading "Orbital Timeline" [level=2] [ref=e300]
+    - paragraph [ref=e301]: My path through time — tap a node to explore.
+    - generic [ref=e302]:
+      - generic [ref=e303]:
+        - img [ref=e305] [cursor=pointer]
+        - generic: Discovery
+      - generic [ref=e307]:
+        - img [ref=e309] [cursor=pointer]
+        - generic: Foundation
+      - generic [ref=e312]:
+        - img [ref=e314] [cursor=pointer]
+        - generic: Growth
+      - generic [ref=e317]:
+        - img [ref=e319] [cursor=pointer]
+        - generic: Mastery
+      - generic [ref=e322]:
+        - img [ref=e324] [cursor=pointer]
+        - generic: Future
+  - generic [ref=e327]:
+    - generic [ref=e328]: "[ 05 ] Process"
+    - heading "How I Work" [level=2] [ref=e329]
+    - paragraph [ref=e330]: A streamlined workflow that keeps quality high, communication clear, and timelines on track.
+    - generic [ref=e331]:
+      - generic [ref=e332]:
+        - generic [ref=e333]:
+          - generic [ref=e334]: "[01]"
+          - generic [ref=e335]: "->"
+        - heading "Discovery" [level=3] [ref=e336]
+        - paragraph [ref=e337]: We talk through your vision, goals, and requirements. No commitment — just understanding what you need.
+      - generic [ref=e338]:
+        - generic [ref=e339]:
+          - generic [ref=e340]: "[02]"
+          - generic [ref=e341]: "->"
+        - heading "Design" [level=3] [ref=e342]
+        - paragraph [ref=e343]: Wireframes and mockups that capture your brand identity, tailored to your audience and goals.
+      - generic [ref=e344]:
+        - generic [ref=e345]:
+          - generic [ref=e346]: "[03]"
+          - generic [ref=e347]: "->"
+        - heading "Develop" [level=3] [ref=e348]
+        - paragraph [ref=e349]: Clean, performant code with React, TypeScript, and modern tooling. You get updates as things take shape.
+      - generic [ref=e350]:
+        - generic [ref=e351]:
+          - generic [ref=e352]: "[04]"
+          - generic [ref=e353]: "->"
+        - heading "Launch & Support" [level=3] [ref=e354]
+        - paragraph [ref=e355]: Deployed, tested, and handed over with documentation. I&apos;m always around for tweaks and support.
+  - generic [ref=e362]:
+    - generic [ref=e363]:
+      - generic [ref=e364]:
+        - generic [ref=e365]: "[ 04 ]"
+        - generic [ref=e366]: Pricing
+      - heading "Transparent Pricing" [level=2] [ref=e367]
+      - paragraph [ref=e368]: No surprises. Every business deserves a great website at an accessible price.
+    - generic [ref=e369]:
+      - generic [ref=e372]:
+        - paragraph [ref=e373]: STARTER
+        - generic [ref=e375]:
+          - generic [ref=e376]: $120
+          - generic [ref=e377]: ₦180k
+        - paragraph [ref=e378]: one-time payment
+        - list [ref=e379]:
+          - listitem [ref=e380]:
+            - img [ref=e381]
+            - generic [ref=e383]: Single-page website
+          - listitem [ref=e384]:
+            - img [ref=e385]
+            - generic [ref=e387]: Mobile responsive design
+          - listitem [ref=e388]:
+            - img [ref=e389]
+            - generic [ref=e391]: Basic SEO setup
+          - listitem [ref=e392]:
+            - img [ref=e393]
+            - generic [ref=e395]: Contact form integration
+          - listitem [ref=e396]:
+            - img [ref=e397]
+            - generic [ref=e399]: 1 round of revisions
+          - listitem [ref=e400]:
+            - img [ref=e401]
+            - generic [ref=e403]: 3-5 day delivery
+        - generic [ref=e404]:
+          - link "Get Started" [ref=e405] [cursor=pointer]:
+            - /url: "#contact"
+          - paragraph [ref=e406]: Perfect for small businesses and personal sites
+      - generic [ref=e408]:
+        - generic [ref=e409]:
+          - img [ref=e410]
+          - generic [ref=e412]: Popular
+        - generic [ref=e413]:
+          - paragraph [ref=e414]: PROFESSIONAL
+          - generic [ref=e416]:
+            - generic [ref=e417]: $300
+            - generic [ref=e418]: ₦450k
+          - paragraph [ref=e419]: one-time payment
+          - list [ref=e420]:
+            - listitem [ref=e421]:
+              - img [ref=e422]
+              - generic [ref=e424]: Up to 5 pages
+            - listitem [ref=e425]:
+              - img [ref=e426]
+              - generic [ref=e428]: Custom design & branding
+            - listitem [ref=e429]:
+              - img [ref=e430]
+              - generic [ref=e432]: Advanced SEO optimization
+            - listitem [ref=e433]:
+              - img [ref=e434]
+              - generic [ref=e436]: CMS integration
+            - listitem [ref=e437]:
+              - img [ref=e438]
+              - generic [ref=e440]: 3 rounds of revisions
+            - listitem [ref=e441]:
+              - img [ref=e442]
+              - generic [ref=e444]: 1-2 week delivery
+            - listitem [ref=e445]:
+              - img [ref=e446]
+              - generic [ref=e448]: Priority support
+          - generic [ref=e449]:
+            - link "Get Started" [ref=e450] [cursor=pointer]:
+              - /url: "#contact"
+            - paragraph [ref=e451]: Ideal for growing businesses — Most Popular
+      - generic [ref=e454]:
+        - paragraph [ref=e455]: PREMIUM
+        - generic [ref=e457]:
+          - generic [ref=e458]: $900
+          - generic [ref=e459]: ₦1.35M
+        - paragraph [ref=e460]: one-time payment
+        - list [ref=e461]:
+          - listitem [ref=e462]:
+            - img [ref=e463]
+            - generic [ref=e465]: Custom pages & features
+          - listitem [ref=e466]:
+            - img [ref=e467]
+            - generic [ref=e469]: Full-stack development
+          - listitem [ref=e470]:
+            - img [ref=e471]
+            - generic [ref=e473]: 3D / WebGL experiences
+          - listitem [ref=e474]:
+            - img [ref=e475]
+            - generic [ref=e477]: Unlimited revisions
+          - listitem [ref=e478]:
+            - img [ref=e479]
+            - generic [ref=e481]: Scoped individually
+          - listitem [ref=e482]:
+            - img [ref=e483]
+            - generic [ref=e485]: Ongoing support & maintenance
+          - listitem [ref=e486]:
+            - img [ref=e487]
+            - generic [ref=e489]: SLA agreement
+        - generic [ref=e490]:
+          - link "Contact Sales" [ref=e491] [cursor=pointer]:
+            - /url: "#contact"
+          - paragraph [ref=e492]: For large-scale custom projects
+    - link "Not sure which tier fits? Reach out — I'll help you figure it out." [ref=e494] [cursor=pointer]:
+      - /url: "#contact"
+      - img [ref=e495]
+      - text: Not sure which tier fits? Reach out — I'll help you figure it out.
+  - generic [ref=e502] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e565]:
+      - img [ref=e504]
+    - generic [ref=e552]:
+      - button "Open issues overlay" [ref=e553]:
+        - generic [ref=e554]:
+          - generic [ref=e555]: "0"
+          - generic [ref=e556]: "1"
+        - generic [ref=e557]: Issue
+      - button "Collapse issues badge" [ref=e558]:
+        - img [ref=e559]
+  - alert [ref=e561]

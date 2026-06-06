@@ -1,0 +1,48 @@
+{
+  "name": "website-new",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@number-flow/react": "^0.6.0",
+    "@radix-ui/react-label": "^2.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
+    "@radix-ui/react-switch": "^1.2.6",
+    "@splinetool/react-spline": "^4.1.0",
+    "@splinetool/runtime": "^1.12.97",
+    "canvas-confetti": "^1.9.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "csstype": "^3.2.3",
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.17.0",
+    "motion-dom": "^12.40.0",
+    "motion-utils": "^12.39.0",
+    "next": "16.2.7",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "^3.6.0",
+    "usehooks-ts": "^3.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/canvas-confetti": "^1.9.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.2.7",
+    "playwright": "^1.60.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  },
+  "optionalDependencies": {
+    "@next/swc-win32-x64-msvc": "^16.2.7",
+    "lightningcss-win32-x64-msvc": "^1.32.0"
+  }
+}
