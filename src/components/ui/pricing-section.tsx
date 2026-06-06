@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
@@ -72,6 +72,14 @@ export function PricingSection() {
     offset: ["start end", "end start"],
   })
 
+  const [isMd, setIsMd] = useState(true)
+  useEffect(() => {
+    setIsMd(window.innerWidth >= 768)
+    const h = () => setIsMd(window.innerWidth >= 768)
+    window.addEventListener("resize", h)
+    return () => window.removeEventListener("resize", h)
+  }, [])
+
   const leftX = useTransform(scrollYProgress, [0, 0.4], [-50, 30])
   const rightX = useTransform(scrollYProgress, [0, 0.4], [50, -30])
   const middleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.08])
@@ -115,17 +123,17 @@ export function PricingSection() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col md:flex-row justify-center items-stretch gap-6">
+        <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 md:gap-6">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
               className="flex-1 max-w-sm relative"
-              style={{
+              style={isMd ? {
                 x: index === 0 ? leftX : index === 2 ? rightX : 0,
                 scale: index === 1 ? middleScale : index === 0 || index === 2 ? sideScale : 1,
                 opacity: index === 0 || index === 2 ? sideOpacity : 1,
                 zIndex: index === 1 ? middleZ : 0,
-              }}
+              } : {}}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

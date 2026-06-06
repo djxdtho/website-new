@@ -5,10 +5,12 @@ import Image from "next/image"
 import { StarBorder } from "@/components/ui/star-border"
 import { CornerBrackets } from "@/components/ui/card"
 
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH || ""
+
 const projects = [
   {
     id: "001",
-    src: "/portfolio/card1.png",
+    src: `${BASE}/portfolio/card1.png`,
     name: "FitTrack",
     stack: "React / TS / Tailwind",
     description: "Fitness app with AI coach, workout tracking, analytics, and exercise library.",
@@ -16,7 +18,7 @@ const projects = [
   },
   {
     id: "002",
-    src: "/portfolio/card2.png",
+    src: `${BASE}/portfolio/card2.png`,
     name: "Zari",
     stack: "React / TS / Tailwind",
     description: "Modern restaurant website with menu showcase, gallery, and reservation booking.",
@@ -24,7 +26,7 @@ const projects = [
   },
   {
     id: "003",
-    src: "/portfolio/card3.png",
+    src: `${BASE}/portfolio/card3.png`,
     name: "Notes",
     stack: "React / TS / Firebase",
     description: "Full-featured notes app with authentication and cloud sync across devices.",
@@ -32,7 +34,7 @@ const projects = [
   },
   {
     id: "004",
-    src: "/portfolio/card4.png",
+    src: `${BASE}/portfolio/card4.png`,
     name: "Todo List",
     stack: "React / TS / Tailwind",
     description: "Task manager with priorities, due dates, overdue warnings, and search filters.",
@@ -40,7 +42,7 @@ const projects = [
   },
   {
     id: "005",
-    src: "/portfolio/card5.png",
+    src: `${BASE}/portfolio/card5.png`,
     name: "Digital Clock",
     stack: "React / TS / PWA",
     description: "Futuristic digital clock with 10 themes, particles, 12/24h modes, and PWA support.",

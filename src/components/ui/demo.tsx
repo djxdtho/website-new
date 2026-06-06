@@ -10,8 +10,8 @@ import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
-import { Phone, User, Package, Wrench, Calendar, Code, FileText, Clock, Map, DollarSign, Briefcase } from "lucide-react"
-import RadialOrbitalTimeline from "@/components/ui/radial-orbital-timeline"
+import { User, Package, Wrench, Map, DollarSign, Briefcase } from "lucide-react"
+import { ProcessTimeline } from "@/components/ui/process-timeline"
 import { CurvedMobileNav } from "@/components/ui/curved-mobile-nav"
 import { PricingSection } from "@/components/ui/pricing-section"
 import { WorkSection } from "@/components/ui/work-section"
@@ -121,7 +121,6 @@ function TechItem({ name, desc }: { name: string; desc: string }) {
 export function SplineSceneBasic() {
   const [loaded, setLoaded] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [isMobile, setIsMobile] = useState(true)
   const [activeSection, setActiveSection] = useState<string | null>(null)
   const { scrollY } = useScroll()
 
@@ -132,13 +131,6 @@ export function SplineSceneBasic() {
   useEffect(() => {
     const t = setTimeout(() => setLoaded(true), 1200)
     return () => clearTimeout(t)
-  }, [])
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-    const handle = () => setIsMobile(window.innerWidth < 768)
-    window.addEventListener("resize", handle)
-    return () => window.removeEventListener("resize", handle)
   }, [])
 
   const sectionIds = ["about", "services", "toolkit", "journey", "work", "pricing"]
@@ -196,7 +188,7 @@ export function SplineSceneBasic() {
 
       {/* ─── STICKY NAVBAR ─── */}
       <motion.nav
-        className="fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 md:px-8 py-3 transition-all duration-300"
+        className="fixed top-0 left-0 right-0 z-40 items-center justify-between px-4 md:px-8 py-3 transition-all duration-300 hidden md:flex"
         initial={false}
         animate={{
           backgroundColor: scrolled ? "rgba(0,0,0,0.85)" : "transparent",
@@ -228,14 +220,10 @@ export function SplineSceneBasic() {
       <div className="relative w-full h-dvh overflow-hidden bg-background">
         <Spotlight />
         <div className="absolute inset-0">
-          {isMobile ? (
-            <div className="w-full h-full bg-gradient-to-b from-white/[0.02] to-transparent" />
-          ) : (
-            <SplineScene
-              scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-              className="w-full h-full"
-            />
-          )}
+          <SplineScene
+            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+            className="w-full h-full"
+          />
         </div>
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none">
           <h1 className="text-5xl md:text-7xl font-bold text-foreground font-display">
@@ -282,7 +270,7 @@ export function SplineSceneBasic() {
       <section id="about" className="relative z-10 min-h-dvh flex items-center py-24 px-6">
         <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 md:gap-20 items-start">
           {/* Left: visual */}
-          <Card data-grid-size="lg" className="sticky top-24 aspect-square flex items-center justify-center overflow-hidden">
+          <Card data-grid-size="lg" className="md:sticky md:top-24 aspect-square flex items-center justify-center overflow-hidden">
             <motion.span
               className="text-9xl font-bold text-white/10 select-none font-display inline-block"
               initial={{ y: -120, opacity: 0 }}
@@ -398,41 +386,8 @@ export function SplineSceneBasic() {
       <ServicesSection />
       <ToolkitSection />
 
-      {/* ─── ORBITAL TIMELINE ─── */}
-      <RadialOrbitalTimeline
-        timelineData={[
-          {
-            id: 1, title: "Discovery", date: "2023",
-            content: "First HTML tag sparked a passion for building on the web.",
-            category: "Learning", icon: Calendar,
-            relatedIds: [2], status: "completed", energy: 100,
-          },
-          {
-            id: 2, title: "Foundation", date: "2024",
-            content: "Mastered JavaScript, React, and shipped multiple projects.",
-            category: "Learning", icon: FileText,
-            relatedIds: [1, 3], status: "completed", energy: 90,
-          },
-          {
-            id: 3, title: "Growth", date: "2025",
-            content: "TypeScript, Tailwind, freelancing — turning skill into value.",
-            category: "Growth", icon: Code,
-            relatedIds: [2, 4], status: "completed", energy: 75,
-          },
-          {
-            id: 4, title: "Mastery", date: "2026",
-            content: "Full-stack, 3D Web, WebGL — pushing every boundary.",
-            category: "Growth", icon: Clock,
-            relatedIds: [3, 5], status: "in-progress", energy: 50,
-          },
-          {
-            id: 5, title: "Future", date: "2027+",
-            content: "Where I'm headed next — always building, always learning.",
-            category: "Future", icon: Calendar,
-            relatedIds: [4], status: "pending", energy: 15,
-          },
-        ]}
-      />
+      {/* ─── PROCESS TIMELINE ─── */}
+      <ProcessTimeline />
 
       {/* ─── WORK ─── */}
       <WorkSection />
