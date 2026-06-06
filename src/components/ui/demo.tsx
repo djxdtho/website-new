@@ -129,33 +129,41 @@ export function SplineSceneBasic() {
   })
 
   useEffect(() => {
-    const t = setTimeout(() => setLoaded(true), 1200)
+    const t = setTimeout(() => setLoaded(true), 400)
     return () => clearTimeout(t)
   }, [])
 
   const sectionIds = ["about", "services", "toolkit", "journey", "work", "pricing"]
 
   useEffect(() => {
+    let raf = 0
     const onScroll = () => {
-      const vh = window.innerHeight
-      let best = sectionIds[0]
-      let bestRatio = 0
-      for (const id of sectionIds) {
-        const el = document.getElementById(id)
-        if (!el) continue
-        const rect = el.getBoundingClientRect()
-        const visible = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0))
-        const ratio = rect.height > 0 ? visible / rect.height : 0
-        if (ratio > bestRatio) {
-          bestRatio = ratio
-          best = id
+      if (raf) return
+      raf = requestAnimationFrame(() => {
+        raf = 0
+        const vh = window.innerHeight
+        let best = sectionIds[0]
+        let bestRatio = 0
+        for (const id of sectionIds) {
+          const el = document.getElementById(id)
+          if (!el) continue
+          const rect = el.getBoundingClientRect()
+          const visible = Math.max(0, Math.min(rect.bottom, vh) - Math.max(rect.top, 0))
+          const ratio = rect.height > 0 ? visible / rect.height : 0
+          if (ratio > bestRatio) {
+            bestRatio = ratio
+            best = id
+          }
         }
-      }
-      if (bestRatio > 0) setActiveSection(best)
+        if (bestRatio > 0) setActiveSection(best)
+      })
     }
     window.addEventListener("scroll", onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener("scroll", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
   }, [])
 
   const sectionToTab: Record<string, number> = {

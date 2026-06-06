@@ -155,7 +155,7 @@ export function WorkSection() {
       </div>
 
       <div className="relative" style={{ height: `${projects.length * 100}vh` }}>
-        <div className="sticky top-[160px] h-[calc(100vh-160px)] overflow-hidden">
+        <div className="sticky top-[160px] h-[calc(100vh-160px)] overflow-hidden" style={{ willChange: "transform" }}>
           <div className="max-w-5xl mx-auto px-6 w-full h-full relative">
             {projects.map((project, index) => (
               <div
