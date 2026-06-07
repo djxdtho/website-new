@@ -6,16 +6,30 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
+import { FallingPattern } from "@/components/ui/falling-pattern"
 
 export function ContactSection() {
   return (
-    <section id="contact" className="relative z-10 py-24 md:py-32 px-6 bg-background">
-      <div className="max-w-5xl mx-auto">
-        <div className="mb-4">
+    <section id="contact" className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
+      <div className="absolute inset-0 z-0">
+        <FallingPattern
+          color="rgba(255,255,255,0.06)"
+          backgroundColor="transparent"
+          duration={180}
+          blurIntensity="0.4em"
+          density={4}
+          className="h-full"
+        />
+      </div>
+      <div className="relative z-[1] max-w-5xl mx-auto">
+        <div className="mb-2">
           <span className="text-[10px] font-mono text-white/40 tracking-[1px] uppercase">
             [ 09 ]  Contact
           </span>
         </div>
+        <p className="text-white/40 text-xs font-mono tracking-wider uppercase mb-8">
+          Got a project? Let&apos;s make it real.
+        </p>
         <ContactCard
           title="Get in Touch"
           description="Have a project in mind or just want to say hi? Fill out the form and I'll get back to you within 24 hours."
