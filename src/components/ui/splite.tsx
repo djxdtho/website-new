@@ -9,12 +9,12 @@ interface SplineSceneProps {
 
 function SplineFallback() {
   return (
-    <div className="w-full h-full bg-gradient-to-b from-white/[0.02] to-transparent relative overflow-hidden">
+    <div className="w-full h-full bg-gradient-to-b from-white/[0.03] to-transparent relative overflow-hidden">
       <div className="absolute inset-0">
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="absolute rounded-full border border-white/[0.04] animate-float"
+            className="absolute rounded-full border border-white/[0.06] animate-float"
             style={{
               width: `${100 + i * 60}px`,
               height: `${100 + i * 60}px`,
@@ -25,13 +25,13 @@ function SplineFallback() {
             }}
           />
         ))}
-        {[...Array(8)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div
             key={`dot-${i}`}
-            className="absolute w-1 h-1 rounded-full bg-white/[0.03]"
+            className="absolute w-[2px] h-[2px] rounded-full bg-white/[0.06]"
             style={{
-              top: `${10 + (i * 17) % 80}%`,
-              left: `${15 + (i * 23) % 70}%`,
+              top: `${Math.random() * 90 + 5}%`,
+              left: `${Math.random() * 90 + 5}%`,
               animation: `pulse ${3 + i * 0.5}s ease-in-out infinite`,
               animationDelay: `${-i * 0.4}s`,
             }}
@@ -64,11 +64,17 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
   useEffect(() => {
     const result = checkWebGL2()
     console.log('[Spline] WebGL 2.0 check:', result.ok, '|', result.info)
-    if (!result.ok) return
+    if (!result.ok) {
+      console.log('[Spline] WebGL2 not available, using fallback')
+      return
+    }
     setShowSpline(true)
   }, [])
 
-  if (!showSpline) return <SplineFallback />
+  if (!showSpline) {
+    console.log('[Spline] Rendering fallback (WebGL2 unavailable)')
+    return <SplineFallback />
+  }
 
   return <SplineLoader scene={scene} className={className} />
 }
@@ -76,24 +82,36 @@ export function SplineScene({ scene, className }: SplineSceneProps) {
 function SplineLoader({ scene, className }: SplineSceneProps) {
   const [Comp, setComp] = useState<React.ComponentType<{ scene: string }> | null>(null)
   const [errored, setErrored] = useState(false)
+  const [timedOut, setTimedOut] = useState(false)
 
   useEffect(() => {
     let cancelled = false
+    const timeout = setTimeout(() => {
+      if (!cancelled && !Comp) {
+        console.log('[Spline] Loading timeout (10s)')
+        setTimedOut(true)
+      }
+    }, 10000)
     import('@splinetool/react-spline').then((mod) => {
       if (!cancelled) {
         console.log('[Spline] Import succeeded')
         setComp(() => mod.default)
+        clearTimeout(timeout)
       }
     }).catch((err) => {
       if (!cancelled) {
         console.log('[Spline] Import failed:', String(err).substring(0, 200))
         setErrored(true)
+        clearTimeout(timeout)
       }
     })
-    return () => { cancelled = true }
+    return () => { cancelled = true; clearTimeout(timeout) }
   }, [])
 
-  if (errored) return <SplineFallback />
+  if (errored || timedOut) {
+    console.log('[Spline] Rendering fallback (error/timeout)')
+    return <SplineFallback />
+  }
   if (!Comp) return <SplineFallback />
 
   return (
