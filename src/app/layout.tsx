@@ -1,6 +1,11 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+};
 
 const hanken = Hanken_Grotesk({
   variable: "--font-display",
@@ -35,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${hanken.variable} ${inter.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-foreground relative">
+      <body className="min-h-full flex flex-col text-foreground relative overflow-x-hidden">
         {children}
       </body>
     </html>
