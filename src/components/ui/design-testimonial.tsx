@@ -70,7 +70,7 @@ export function Testimonial() {
 
         <div ref={containerRef} className="relative w-full" onMouseMove={handleMouseMove}>
           <motion.div
-            className="absolute -left-8 top-1/2 -translate-y-1/2 text-[28rem] font-bold text-foreground/[0.03] select-none pointer-events-none leading-none tracking-tighter"
+            className="absolute -left-8 top-1/2 -translate-y-1/2 text-[12rem] md:text-[28rem] font-bold text-foreground/[0.03] select-none pointer-events-none leading-none tracking-tighter"
             style={{ x: numberX, y: numberY }}
           >
             <AnimatePresence mode="wait">
@@ -88,7 +88,7 @@ export function Testimonial() {
           </motion.div>
 
           <div className="relative flex">
-            <div className="flex flex-col items-center justify-center pr-16 border-r border-white/[0.06]">
+            <div className="flex flex-col items-center justify-center pr-4 md:pr-16 border-r border-white/[0.06]">
               <motion.span
                 className="text-xs font-mono text-white/40 tracking-widest uppercase"
                 style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
@@ -110,7 +110,7 @@ export function Testimonial() {
               </div>
             </div>
 
-            <div className="flex-1 pl-16 py-12">
+            <div className="flex-1 pl-4 md:pl-16 py-12">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
