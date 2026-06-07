@@ -145,9 +145,11 @@ export function CurvedMobileNav() {
         {open && (
           <>
             {items.map((item, i) => {
-              const offset = i - (items.length - 1) / 2
-              const x = offset * 30
-              const y = -115
+              const angle = -75 + (i / (items.length - 1)) * 150
+              const rad = (angle * Math.PI) / 180
+              const r = 120
+              const x = Math.sin(rad) * r
+              const y = -Math.cos(rad) * r - 5
 
               return (
                 <motion.button
