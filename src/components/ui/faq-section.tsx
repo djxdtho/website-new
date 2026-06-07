@@ -37,7 +37,7 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
+    <section id="faq" className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
       <div className="absolute inset-0 z-0">
         <FallingPattern
           color="rgba(255,255,255,0.08)"

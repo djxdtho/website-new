@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { User, Package, Wrench, Briefcase, DollarSign, X, MessageSquare, HelpCircle } from "lucide-react"
+import { User, Package, Briefcase, DollarSign, X, HelpCircle } from "lucide-react"
 
 const socials = [
   { label: "GitHub", href: "https://github.com/djxdtho",
@@ -39,9 +39,7 @@ const socials = [
 const items = [
   { label: "About", icon: User, id: "about" },
   { label: "Services", icon: Package, id: "services" },
-  { label: "Toolkit", icon: Wrench, id: "toolkit" },
   { label: "Work", icon: Briefcase, id: "work" },
-  { label: "Testimonials", icon: MessageSquare, id: "testimonials" },
   { label: "FAQ", icon: HelpCircle, id: "faq" },
   { label: "Pricing", icon: DollarSign, id: "pricing" },
 ]
@@ -147,11 +145,9 @@ export function CurvedMobileNav() {
         {open && (
           <>
             {items.map((item, i) => {
-              const angle = -80 + (i / (items.length - 1)) * 160
-              const rad = (angle * Math.PI) / 180
-              const r = 125
-              const x = Math.sin(rad) * r
-              const y = -Math.cos(rad) * r - 10
+              const offset = i - (items.length - 1) / 2
+              const x = offset * 30
+              const y = -115
 
               return (
                 <motion.button
