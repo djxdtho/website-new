@@ -46,7 +46,7 @@ export function ContactCard({
               <ContactInfo key={index} {...info} />
             ))}
             {decoration && (
-              <div className="md:col-span-2 lg:col-span-3 row-start-2 flex items-center justify-center border border-white/[0.06] bg-card p-2">
+              <div className="hidden md:flex md:col-span-2 lg:col-span-3 row-start-2 items-center justify-center border border-white/[0.06] bg-card p-2">
                 {decoration}
               </div>
             )}
