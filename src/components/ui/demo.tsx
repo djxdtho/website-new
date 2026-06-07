@@ -168,7 +168,7 @@ export function SplineSceneBasic() {
     return () => clearTimeout(t)
   }, [])
 
-  const sectionIds = ["about", "services", "toolkit", "journey", "work", "testimonials", "faq", "pricing"]
+  const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing"]
 
   useEffect(() => {
     let raf = 0
@@ -202,12 +202,12 @@ export function SplineSceneBasic() {
   }, [])
 
   const sectionToTab: Record<string, number> = {
-    about: 0, services: 1, toolkit: 3, journey: 4, work: 5, testimonials: 7, faq: 8, pricing: 9,
+    about: 0, services: 1, toolkit: 3, process: 4, work: 5, testimonials: 7, faq: 9, pricing: 10,
   }
 
   const handleNav = (i: number | null) => {
     if (i === null) return
-    const id = sectionIds[i > 1 ? (i > 6 ? i - 2 : i - 1) : i]
+    const id = sectionIds[i > 1 ? (i > 6 ? (i > 8 ? i - 3 : i - 2) : i - 1) : i]
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -248,7 +248,7 @@ export function SplineSceneBasic() {
             { title: "Services", icon: Package },
             { type: "separator" },
             { title: "Toolkit", icon: Wrench },
-            { title: "Journey", icon: Map },
+            { title: "Process", icon: Map },
             { title: "Work", icon: Briefcase },
             { type: "separator" },
             { title: "Testimonials", icon: MessageSquare },
