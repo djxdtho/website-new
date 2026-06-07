@@ -61,6 +61,15 @@ export function CurvedMobileNav() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:hidden">
+      {/* Invisible overlay - closes menu when tapping outside the curve */}
+      {open && (
+        <div
+          className="fixed inset-0 md:hidden"
+          style={{ zIndex: -1 }}
+          onClick={() => setOpen(false)}
+        />
+      )}
+
       {/* Expanding curve background */}
       <motion.div
         className="absolute bottom-0 w-full"
