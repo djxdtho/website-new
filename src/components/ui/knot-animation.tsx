@@ -6,7 +6,7 @@ const W = 80;
 const H = 40;
 const PI = 3.14159265;
 
-const ramp = " .·:>⇒⇛➤➡➢";
+const DEFAULT_RAMP = ".,-~:;=!*#$@";
 
 const COLOR_PALETTE = [
   "#e53935",
@@ -37,11 +37,13 @@ const cross = (a: Vec3, b: Vec3): Vec3 => ({
 export const KnotAnimation = ({
   color = false,
   speedA = 0.04,
-  speedB = 0.02
+  speedB = 0.02,
+  ramp = DEFAULT_RAMP,
 }: {
   color?: boolean;
   speedA?: number;
   speedB?: number;
+  ramp?: string;
 }) => {
   const [frame, setFrame] = useState<React.ReactElement[]>([]);
   const [A, setA] = useState(0);
@@ -150,7 +152,7 @@ export const KnotAnimation = ({
     }, 30);
 
     return () => clearInterval(interval);
-  }, [A, B, color, speedA, speedB]);
+  }, [A, B, color, speedA, speedB, ramp]);
 
   return (
     <pre className="font-mono text-[6px] leading-[4px] text-center opacity-40 select-none">
