@@ -12,7 +12,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="relative z-10 py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-6 md:hidden">
           <div className="w-[100px]">
             <KnotAnimation speedA={0.06} speedB={0.03} />
           </div>
@@ -26,6 +26,13 @@ export function ContactSection() {
           Got a project?
         </h2>
         <ContactCard
+          decoration={
+            <div className="hidden md:flex w-full items-center justify-center py-2">
+              <div className="w-full max-w-[160px]">
+                <KnotAnimation speedA={0.06} speedB={0.03} />
+              </div>
+            </div>
+          }
           title="Get in Touch"
           description="Have a project in mind or just want to say hi? Fill out the form and I'll get back to you within 24 hours."
           contactInfo={[
