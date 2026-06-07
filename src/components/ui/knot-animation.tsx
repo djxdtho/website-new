@@ -6,7 +6,7 @@ const W = 80;
 const H = 40;
 const PI = 3.14159265;
 
-const ramp = ".,-~:;=!*#$@";
+const ramp = " .·:>⇒⇛➤➡➢";
 
 const COLOR_PALETTE = [
   "#e53935",
