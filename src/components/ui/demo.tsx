@@ -10,13 +10,14 @@ import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
-import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare, HelpCircle } from "lucide-react"
+import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare, HelpCircle, Phone } from "lucide-react"
 import { ProcessTimeline } from "@/components/ui/process-timeline"
 import { CurvedMobileNav } from "@/components/ui/curved-mobile-nav"
 import { PricingSection } from "@/components/ui/pricing-section"
 import { WorkSection } from "@/components/ui/work-section"
 import { Testimonial } from "@/components/ui/design-testimonial"
 import { FAQSection } from "@/components/ui/faq-section"
+import { ContactSection } from "@/components/ui/contact-section"
 
 const phrases = [
   "Building interactive digital experiences",
@@ -168,7 +169,7 @@ export function SplineSceneBasic() {
     return () => clearTimeout(t)
   }, [])
 
-  const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing"]
+  const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing", "contact"]
 
   useEffect(() => {
     let raf = 0
@@ -202,7 +203,7 @@ export function SplineSceneBasic() {
   }, [])
 
   const sectionToTab: Record<string, number> = {
-    about: 0, services: 1, toolkit: 3, process: 4, work: 5, testimonials: 7, faq: 9, pricing: 10,
+    about: 0, services: 1, toolkit: 3, process: 4, work: 5, testimonials: 7, faq: 9, pricing: 10, contact: 11,
   }
 
   const handleNav = (i: number | null) => {
@@ -255,6 +256,7 @@ export function SplineSceneBasic() {
             { type: "separator" },
             { title: "FAQ", icon: HelpCircle },
             { title: "Pricing", icon: DollarSign },
+            { title: "Contact", icon: Phone },
           ]}
           size="lg"
           selected={activeSection ? sectionToTab[activeSection] ?? null : null}
@@ -466,6 +468,9 @@ export function SplineSceneBasic() {
 
       {/* ─── PRICING ─── */}
       <PricingSection />
+
+      {/* ─── CONTACT ─── */}
+      <ContactSection />
 
       {/* ─── MOBILE NAV ─── */}
       <CurvedMobileNav />

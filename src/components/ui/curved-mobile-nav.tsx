@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { User, Package, Briefcase, DollarSign, X, HelpCircle } from "lucide-react"
+import { User, Package, Briefcase, DollarSign, X, HelpCircle, Phone } from "lucide-react"
 
 const socials = [
   { label: "GitHub", href: "https://github.com/djxdtho",
@@ -42,6 +42,7 @@ const items = [
   { label: "Work", icon: Briefcase, id: "work" },
   { label: "FAQ", icon: HelpCircle, id: "faq" },
   { label: "Pricing", icon: DollarSign, id: "pricing" },
+  { label: "Contact", icon: Phone, id: "contact" },
 ]
 
 const OPEN_HEIGHT = 290
