@@ -10,12 +10,13 @@ import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
-import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare } from "lucide-react"
+import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare, HelpCircle } from "lucide-react"
 import { ProcessTimeline } from "@/components/ui/process-timeline"
 import { CurvedMobileNav } from "@/components/ui/curved-mobile-nav"
 import { PricingSection } from "@/components/ui/pricing-section"
 import { WorkSection } from "@/components/ui/work-section"
 import { Testimonial } from "@/components/ui/design-testimonial"
+import { FAQSection } from "@/components/ui/faq-section"
 
 const phrases = [
   "Building interactive digital experiences",
@@ -167,7 +168,7 @@ export function SplineSceneBasic() {
     return () => clearTimeout(t)
   }, [])
 
-  const sectionIds = ["about", "services", "toolkit", "journey", "work", "testimonials", "pricing"]
+  const sectionIds = ["about", "services", "toolkit", "journey", "work", "testimonials", "faq", "pricing"]
 
   useEffect(() => {
     let raf = 0
@@ -201,7 +202,7 @@ export function SplineSceneBasic() {
   }, [])
 
   const sectionToTab: Record<string, number> = {
-    about: 0, services: 1, toolkit: 3, journey: 4, work: 5, testimonials: 7, pricing: 8,
+    about: 0, services: 1, toolkit: 3, journey: 4, work: 5, testimonials: 7, faq: 8, pricing: 9,
   }
 
   const handleNav = (i: number | null) => {
@@ -251,6 +252,8 @@ export function SplineSceneBasic() {
             { title: "Work", icon: Briefcase },
             { type: "separator" },
             { title: "Testimonials", icon: MessageSquare },
+            { type: "separator" },
+            { title: "FAQ", icon: HelpCircle },
             { title: "Pricing", icon: DollarSign },
           ]}
           size="lg"
@@ -457,6 +460,9 @@ export function SplineSceneBasic() {
 
       {/* ─── TESTIMONIALS ─── */}
       <Testimonial />
+
+      {/* ─── FAQ ─── */}
+      <FAQSection />
 
       {/* ─── PRICING ─── */}
       <PricingSection />
