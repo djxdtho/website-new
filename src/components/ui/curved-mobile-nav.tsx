@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Home, User, Package, Wrench, Calendar, X } from "lucide-react"
+import { User, Package, Wrench, Briefcase, DollarSign, X } from "lucide-react"
 
 const socials = [
   { label: "GitHub", href: "https://github.com/djxdtho",
@@ -40,8 +40,8 @@ const items = [
   { label: "About", icon: User, id: "about" },
   { label: "Services", icon: Package, id: "services" },
   { label: "Toolkit", icon: Wrench, id: "toolkit" },
-  { label: "Journey", icon: Calendar, id: "journey" },
-  { label: "Home", icon: Home, id: "home" },
+  { label: "Work", icon: Briefcase, id: "work" },
+  { label: "Pricing", icon: DollarSign, id: "pricing" },
 ]
 
 const OPEN_HEIGHT = 260
@@ -53,10 +53,6 @@ export function CurvedMobileNav() {
 
   const scrollTo = (id: string) => {
     setOpen(false)
-    if (id === "home") {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-      return
-    }
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
