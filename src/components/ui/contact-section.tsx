@@ -13,8 +13,8 @@ export function ContactSection() {
     <section id="contact" className="relative z-10 py-24 md:py-32 px-6 bg-background">
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-center mb-6">
-          <div className="w-[140px]">
-            <KnotAnimation color speedA={0.03} speedB={0.015} />
+          <div className="w-[100px]">
+            <KnotAnimation speedA={0.06} speedB={0.03} />
           </div>
         </div>
         <div className="mb-2">
@@ -22,9 +22,9 @@ export function ContactSection() {
             [ 09 ]  Contact
           </span>
         </div>
-        <p className="text-white/40 text-xs font-mono tracking-wider uppercase mb-8">
-          Got a project? Let&apos;s make it real.
-        </p>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-foreground tracking-tight mb-8 leading-[1.05]">
+          Got a project?
+        </h2>
         <ContactCard
           title="Get in Touch"
           description="Have a project in mind or just want to say hi? Fill out the form and I'll get back to you within 24 hours."
