@@ -15,6 +15,7 @@ import { ProcessTimeline } from "@/components/ui/process-timeline"
 import { CurvedMobileNav } from "@/components/ui/curved-mobile-nav"
 import { PricingSection } from "@/components/ui/pricing-section"
 import { WorkSection } from "@/components/ui/work-section"
+import { Testimonial } from "@/components/ui/design-testimonial"
 
 const phrases = [
   "Building interactive digital experiences",
@@ -451,6 +452,9 @@ export function SplineSceneBasic() {
 
       {/* ─── WORK ─── */}
       <WorkSection />
+
+      {/* ─── TESTIMONIALS ─── */}
+      <Testimonial />
 
       {/* ─── PRICING ─── */}
       <PricingSection />
