@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
+import { Card } from "@/components/ui/card"
 
 const faqs = [
   {
@@ -46,7 +47,7 @@ export function FAQSection() {
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i
             return (
-              <div key={i} className="border border-white/[0.06] bg-card">
+              <Card key={i}>
                 <button
                   onClick={() => setOpenIndex(isOpen ? null : i)}
                   className="flex w-full items-center justify-between px-6 py-5 text-left"
@@ -87,7 +88,7 @@ export function FAQSection() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </Card>
             )
           })}
         </div>
