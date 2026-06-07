@@ -150,7 +150,7 @@ export function CurvedMobileNav() {
               const rad = (angle * Math.PI) / 180
               const r = 120
               const x = Math.sin(rad) * r
-              const y = -Math.cos(rad) * r - 5
+              const y = -Math.cos(rad) * r - 5 + (i === 0 || i === items.length - 1 ? 10 : 0)
 
               return (
                 <motion.button
