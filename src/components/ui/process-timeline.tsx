@@ -53,23 +53,28 @@ export function ProcessTimeline() {
   const scrollOffset = useRef(0)
   const pathLen = useRef(0)
   const raf = useRef(0)
+  const vh = useRef(0)
+  const vw = useRef(0)
+  const posState = useRef<"before" | "during" | "after">("before")
 
   const CARD_W = 340
   const CARD_H = 220
 
   const setup = useCallback(() => {
     setIsMobile(window.innerWidth < 1024)
+    vh.current = window.innerHeight
+    vw.current = window.innerWidth
 
     if (sectionRef.current) {
       scrollOffset.current =
         sectionRef.current.getBoundingClientRect().top + window.scrollY
     }
 
-    const w = window.innerWidth
-    const h = window.innerHeight
+    const w = vw.current
+    const h = vh.current
     let d = ""
 
-    if (window.innerWidth < 1024) {
+    if (w < 1024) {
       const cx = w / 2
       d = `M ${cx},-10 L ${cx},${h / 2 - CARD_H / 2}`
     } else {
@@ -102,13 +107,18 @@ export function ProcessTimeline() {
   }, [])
 
   useEffect(() => {
+    const onResize = () => {
+      vh.current = window.innerHeight
+      vw.current = window.innerWidth
+      setup()
+    }
     requestAnimationFrame(() => {
       setup()
       setTimeout(setup, 150)
     })
-    window.addEventListener("resize", setup, { passive: true })
+    window.addEventListener("resize", onResize, { passive: true })
     return () => {
-      window.removeEventListener("resize", setup)
+      window.removeEventListener("resize", onResize)
       cancelAnimationFrame(raf.current)
     }
   }, [setup])
@@ -126,67 +136,77 @@ export function ProcessTimeline() {
 
       if (!ce || !xe) return
 
-      const vh = window.innerHeight
-      const vw = window.innerWidth
       const d = y - scrollOffset.current
+      const _vh = vh.current
+      const _vw = vw.current
 
       if (pe && ae && pathLen.current > 0) {
-        const draw = Math.min(Math.max((d + vh) / vh, 0), 1)
+        const draw = Math.min(Math.max((d + _vh) / _vh, 0), 1)
         pe.style.strokeDasharray = `${pathLen.current}`
         pe.style.strokeDashoffset = `${(pathLen.current - draw * pathLen.current).toFixed(1)}`
       }
 
-      if (d < -vh * 0.35) {
-        ce.style.visibility = "hidden"
+      // Visibility — early exit when far before section
+      if (d < -_vh * 0.35) {
+        if (posState.current !== "before") {
+          posState.current = "before"
+          ce.style.position = "absolute"
+          ce.style.top = "50vh"
+          ce.style.overflow = "hidden"
+        }
         ce.style.opacity = "0"
-      } else {
+        ce.style.transform = "translate3d(0,0,0) scale(1)"
+        xe.style.transform = "scale(1)"
+        return
+      }
+
+      // Entered visible range
+      if (posState.current === "before") {
         ce.style.visibility = "visible"
-        ce.style.opacity = "1"
+        ce.style.position = "fixed"
+        ce.style.top = "50%"
+        ce.style.overflow = "hidden"
+        if (ae) {
+          ae.style.position = "fixed"
+          ae.style.top = "0"
+        }
+        posState.current = "during"
       }
 
       if (d <= 0) {
-        ce.style.position = "absolute"
-        ce.style.top = "50vh"
+        ce.style.opacity = "1"
         ce.style.transform = "translate3d(0,0,0) scale(1)"
-        if (ae) {
-          ae.style.position = "absolute"
-          ae.style.top = "0"
-        }
         xe.style.transform = "scale(1)"
-        ce.style.overflow = "hidden"
-      } else {
-        const total = vh * 1.2
-        const p = Math.min(Math.max(d / total, 0), 1)
-
-        if (p < 1) {
-          ce.style.position = "fixed"
-          ce.style.top = "50%"
-          if (ae) {
-            ae.style.position = "fixed"
-            ae.style.top = "0"
-          }
-          ce.style.overflow = "hidden"
-        } else {
-          ce.style.position = "absolute"
-          ce.style.top = `${total + vh / 2}px`
-          if (ae) {
-            ae.style.position = "absolute"
-            ae.style.top = `${total}px`
-          }
-          ce.style.overflow = "visible"
-        }
-
-        const e = solveBezier(p)
-        const sx = 1 + e * (vw / CARD_W - 1)
-        const sy = 1 + e * (vh / CARD_H - 1)
-
-        ce.style.transform = `translate3d(0,0,0) scale(${sx.toFixed(4)},${sy.toFixed(4)})`
-        xe.style.transform = `scale(${(1 / sx).toFixed(4)},${(1 / sy).toFixed(4)})`
-
-        const bo = Math.max(0, 1 - e / 0.5)
+        const bo = Math.max(0, 1 - 0 / 0.5)
         ce.style.borderWidth = bo < 0.01 ? "0px" : "1px"
         ce.style.borderColor = `rgba(255,255,255,${bo.toFixed(3)})`
+        return
       }
+
+      const total = _vh * 1.2
+      const p = Math.min(Math.max(d / total, 0), 1)
+
+      if (p >= 1 && posState.current !== "after") {
+        posState.current = "after"
+        ce.style.position = "absolute"
+        ce.style.top = `${total + _vh / 2}px`
+        ce.style.overflow = "visible"
+        if (ae) {
+          ae.style.position = "absolute"
+          ae.style.top = `${total}px`
+        }
+      }
+
+      const e = solveBezier(p)
+      const sx = 1 + e * (_vw / CARD_W - 1)
+      const sy = 1 + e * (_vh / CARD_H - 1)
+
+      ce.style.transform = `translate3d(0,0,0) scale(${sx.toFixed(4)},${sy.toFixed(4)})`
+      xe.style.transform = `scale(${(1 / sx).toFixed(4)},${(1 / sy).toFixed(4)})`
+
+      const bo = Math.max(0, 1 - e / 0.5)
+      ce.style.borderWidth = bo < 0.01 ? "0px" : "1px"
+      ce.style.borderColor = `rgba(255,255,255,${bo.toFixed(3)})`
     })
   })
 
@@ -238,6 +258,7 @@ export function ProcessTimeline() {
           zIndex: 50,
           overflow: "hidden",
           transformOrigin: "center center",
+          willChange: "transform",
         }}
       >
         <div
@@ -254,6 +275,7 @@ export function ProcessTimeline() {
             alignItems: "center",
             justifyContent: "center",
             transformOrigin: "center center",
+            willChange: "transform",
           }}
         >
           <div className="w-full h-full overflow-y-auto px-6 md:px-12 lg:px-16 py-12 md:py-16">

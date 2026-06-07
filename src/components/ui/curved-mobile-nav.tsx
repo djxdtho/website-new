@@ -44,6 +44,9 @@ const items = [
   { label: "Home", icon: Home, id: "home" },
 ]
 
+const OPEN_HEIGHT = 260
+const CLOSED_HEIGHT = 100
+
 export function CurvedMobileNav() {
   const [open, setOpen] = useState(false)
 
@@ -58,38 +61,31 @@ export function CurvedMobileNav() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:hidden">
-      {/* Backdrop blur */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => setOpen(false)}
-            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Curved background */}
-      <svg
-        viewBox="0 0 375 100"
-        className="absolute bottom-0 w-full h-[100px]"
-        preserveAspectRatio="none"
-        style={{ filter: "drop-shadow(0 -4px 20px rgba(0,0,0,0.4))" }}
+      {/* Expanding curve background */}
+      <motion.div
+        className="absolute bottom-0 w-full"
+        animate={{ height: open ? OPEN_HEIGHT : CLOSED_HEIGHT }}
+        transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+        style={{ overflow: "hidden" }}
       >
-        <path
-          d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60 L375,100 L0,100 Z"
-          fill="rgba(10,10,10,0.92)"
-        />
-        <path
-          d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60"
-          fill="none"
-          stroke="rgba(255,255,255,0.06)"
-          strokeWidth="0.5"
-        />
-      </svg>
+        <svg
+          viewBox="0 0 375 260"
+          className="w-full h-[260px]"
+          preserveAspectRatio="none"
+          style={{ filter: "drop-shadow(0 -4px 20px rgba(0,0,0,0.4))" }}
+        >
+          <path
+            d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60 L375,260 L0,260 Z"
+            fill="rgba(10,10,10,0.92)"
+          />
+          <path
+            d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60"
+            fill="none"
+            stroke="rgba(255,255,255,0.06)"
+            strokeWidth="0.5"
+          />
+        </svg>
+      </motion.div>
 
       {/* Center FAB */}
       <motion.button
@@ -146,6 +142,7 @@ export function CurvedMobileNav() {
                   transition={{ delay: i * 0.03, type: "spring", stiffness: 300, damping: 25 }}
                   onClick={() => scrollTo(item.id)}
                   className="absolute bottom-[52px] flex flex-col items-center gap-1"
+                  style={{ zIndex: 20 }}
                 >
                   <span className="w-10 h-10 flex items-center justify-center border border-white/10 bg-black/90 text-white/70">
                     <item.icon size={16} strokeWidth={1.5} />
@@ -164,6 +161,7 @@ export function CurvedMobileNav() {
               exit={{ opacity: 0, y: 10 }}
               transition={{ delay: 0.2, duration: 0.4 }}
               className="absolute bottom-3 left-0 right-0 flex items-center justify-center gap-5"
+              style={{ zIndex: 20 }}
             >
               {socials.map((s, i) => (
                 <motion.a
