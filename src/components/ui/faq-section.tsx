@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { Card } from "@/components/ui/card"
+import { FallingPattern } from "@/components/ui/falling-pattern"
 
 const faqs = [
   {
@@ -36,12 +37,29 @@ export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section className="relative z-10 py-24 md:py-32 px-6 bg-background">
-      <div className="max-w-4xl mx-auto">
-        <div className="flex items-center gap-3 mb-12">
-          <span className="font-mono text-[10px] text-white/30 tracking-[1px]">[ 08 ]</span>
-          <span className="font-mono text-[10px] text-white/40 tracking-[1px] uppercase">FAQ</span>
+    <section className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
+      <div className="absolute inset-0 z-0">
+        <FallingPattern
+          color="rgba(255,255,255,0.08)"
+          backgroundColor="transparent"
+          duration={200}
+          blurIntensity="0.3em"
+          density={3}
+          className="h-full"
+        />
+      </div>
+      <div className="relative z-[1] max-w-4xl mx-auto">
+        <div className="mb-4">
+          <span className="text-[10px] font-mono text-white/40 tracking-[1px] uppercase">
+            [ 08 ]  FAQ
+          </span>
         </div>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-medium text-foreground tracking-tight mb-3 leading-[1.05]">
+          Frequently Asked Questions
+        </h2>
+        <p className="text-white/50 text-base md:text-lg leading-relaxed max-w-2xl mb-12">
+          Quick answers to common questions about working with me.
+        </p>
 
         <div className="space-y-3">
           {faqs.map((faq, i) => {
