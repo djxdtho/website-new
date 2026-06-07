@@ -45,7 +45,7 @@ const items = [
   { label: "Pricing", icon: DollarSign, id: "pricing" },
 ]
 
-const OPEN_HEIGHT = 260
+const OPEN_HEIGHT = 290
 const CLOSED_HEIGHT = 100
 
 export function CurvedMobileNav() {
@@ -88,17 +88,17 @@ export function CurvedMobileNav() {
         style={{ overflow: "hidden" }}
       >
         <svg
-          viewBox="0 0 375 260"
-          className="w-full h-[260px]"
+          viewBox="0 0 375 290"
+          className="w-full h-[290px]"
           preserveAspectRatio="none"
           style={{ filter: "drop-shadow(0 -4px 20px rgba(0,0,0,0.4))" }}
         >
           <path
-            d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60 L375,260 L0,260 Z"
+            d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60 L375,290 L0,290 Z"
             fill="rgba(10,10,10,0.92)"
           />
           <path
-            d="M0,60 C60,60 120,20 187.5,20 C255,20 315,60 375,60"
+            d="M0,60 C60,60 120,25 187.5,25 C255,25 315,60 375,60"
             fill="none"
             stroke="rgba(255,255,255,0.06)"
             strokeWidth="0.5"
@@ -148,7 +148,7 @@ export function CurvedMobileNav() {
             {items.map((item, i) => {
               const angle = -80 + (i / (items.length - 1)) * 160
               const rad = (angle * Math.PI) / 180
-              const r = 110
+              const r = 125
               const x = Math.sin(rad) * r
               const y = -Math.cos(rad) * r - 10
 

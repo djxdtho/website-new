@@ -88,9 +88,9 @@ export function Testimonial() {
           </motion.div>
 
           <div className="relative flex">
-            <div className="flex flex-col items-center justify-center pr-4 md:pr-16 border-r border-white/[0.06]">
+            <div className="flex flex-col items-center justify-center pr-3 md:pr-16 border-r border-white/[0.06]">
               <motion.span
-                className="text-xs font-mono text-white/40 tracking-widest uppercase"
+                className="hidden md:block text-xs font-mono text-white/40 tracking-widest uppercase"
                 style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -127,11 +127,11 @@ export function Testimonial() {
                 </motion.div>
               </AnimatePresence>
 
-              <div className="relative mb-12 min-h-[140px]">
+              <div className="relative mb-6 md:mb-12 min-h-[100px] md:min-h-[140px]">
                 <AnimatePresence mode="wait">
                   <motion.blockquote
                     key={activeIndex}
-                    className="text-4xl md:text-5xl font-light text-foreground leading-[1.15] tracking-tight"
+                    className="text-2xl md:text-5xl font-light text-foreground leading-[1.15] tracking-tight"
                     initial="hidden"
                     animate="visible"
                     exit="exit"
