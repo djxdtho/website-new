@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { User, Package, Wrench, Briefcase, DollarSign, X } from "lucide-react"
+import { User, Package, Wrench, Briefcase, DollarSign, X, MessageSquare } from "lucide-react"
 
 const socials = [
   { label: "GitHub", href: "https://github.com/djxdtho",
@@ -41,6 +41,7 @@ const items = [
   { label: "Services", icon: Package, id: "services" },
   { label: "Toolkit", icon: Wrench, id: "toolkit" },
   { label: "Work", icon: Briefcase, id: "work" },
+  { label: "Testimonials", icon: MessageSquare, id: "testimonials" },
   { label: "Pricing", icon: DollarSign, id: "pricing" },
 ]
 

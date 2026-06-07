@@ -7,22 +7,22 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 
 const testimonials = [
   {
-    quote: "Transformed our entire creative process overnight.",
-    author: "Sarah Chen",
-    role: "Design Director",
-    company: "Linear",
+    quote: "He built something that actually feels alive. Our bounce rate dropped 40% the first week.",
+    author: "Tunde Bakare",
+    role: "Founder",
+    company: "Lagos Prints",
   },
   {
-    quote: "The most elegant solution we've ever implemented.",
-    author: "Marcus Webb",
-    role: "Creative Lead",
-    company: "Vercel",
+    quote: "The most responsive, accessible site I've ever worked with. And he's 17. Unreal.",
+    author: "Aisha Mohammed",
+    role: "Product Manager",
+    company: "Pulse Africa",
   },
   {
-    quote: "Pure craftsmanship in every single detail.",
-    author: "Elena Frost",
-    role: "Head of Product",
-    company: "Stripe",
+    quote: "Understood our vision on the first call and delivered more than we imagined.",
+    author: "David Okafor",
+    role: "Creative Director",
+    company: "Studio Noir",
   },
 ]
 
@@ -61,7 +61,7 @@ export function Testimonial() {
   const current = testimonials[activeIndex]
 
   return (
-    <section className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
+    <section id="testimonials" className="relative z-10 py-24 md:py-32 px-6 overflow-hidden bg-background">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-12">
           <span className="font-mono text-[10px] text-white/30 tracking-[1px]">[ 07 ]</span>
@@ -256,12 +256,12 @@ export function Testimonial() {
           <div className="absolute -bottom-20 left-0 right-0 overflow-hidden opacity-[0.04] pointer-events-none">
             <motion.div
               className="flex whitespace-nowrap text-6xl font-bold tracking-tight"
-              animate={{ x: [0, -1000] }}
-              transition={{ duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+              animate={{ x: [0, -2000] }}
+              transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
             >
-              {[...Array(10)].map((_, i) => (
+              {[...Array(4)].map((_, i) => (
                 <span key={i} className="mx-8">
-                  {testimonials.map((t) => t.company).join(" \u2022 ")} \u2022
+                  design &bull; develop &bull; deliver &bull; repeat &bull;
                 </span>
               ))}
             </motion.div>

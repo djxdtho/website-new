@@ -10,7 +10,7 @@ import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
-import { User, Package, Wrench, Map, DollarSign, Briefcase } from "lucide-react"
+import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare } from "lucide-react"
 import { ProcessTimeline } from "@/components/ui/process-timeline"
 import { CurvedMobileNav } from "@/components/ui/curved-mobile-nav"
 import { PricingSection } from "@/components/ui/pricing-section"
@@ -167,7 +167,7 @@ export function SplineSceneBasic() {
     return () => clearTimeout(t)
   }, [])
 
-  const sectionIds = ["about", "services", "toolkit", "journey", "work", "pricing"]
+  const sectionIds = ["about", "services", "toolkit", "journey", "work", "testimonials", "pricing"]
 
   useEffect(() => {
     let raf = 0
@@ -201,12 +201,12 @@ export function SplineSceneBasic() {
   }, [])
 
   const sectionToTab: Record<string, number> = {
-    about: 0, services: 1, toolkit: 3, journey: 4, work: 5, pricing: 6,
+    about: 0, services: 1, toolkit: 3, journey: 4, work: 5, testimonials: 7, pricing: 8,
   }
 
   const handleNav = (i: number | null) => {
     if (i === null) return
-    const id = sectionIds[i > 1 ? i - 1 : i]
+    const id = sectionIds[i > 1 ? (i > 6 ? i - 2 : i - 1) : i]
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
@@ -249,6 +249,8 @@ export function SplineSceneBasic() {
             { title: "Toolkit", icon: Wrench },
             { title: "Journey", icon: Map },
             { title: "Work", icon: Briefcase },
+            { type: "separator" },
+            { title: "Testimonials", icon: MessageSquare },
             { title: "Pricing", icon: DollarSign },
           ]}
           size="lg"
