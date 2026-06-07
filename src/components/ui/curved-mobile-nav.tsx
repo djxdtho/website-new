@@ -147,7 +147,7 @@ export function CurvedMobileNav() {
             {items.map((item, i) => {
               const angle = -80 + (i / (items.length - 1)) * 160
               const rad = (angle * Math.PI) / 180
-              const r = 95
+              const r = 100
               const x = Math.sin(rad) * r
               const y = -Math.cos(rad) * r - 10
 
