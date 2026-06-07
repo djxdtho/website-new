@@ -40,7 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${hanken.variable} ${inter.variable} ${spaceMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-foreground relative overflow-x-hidden">
+      <body className="min-h-full flex flex-col text-foreground relative">
         {children}
       </body>
     </html>
