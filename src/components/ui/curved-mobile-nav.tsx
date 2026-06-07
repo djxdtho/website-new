@@ -58,6 +58,20 @@ export function CurvedMobileNav() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:hidden">
+      {/* Backdrop blur */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setOpen(false)}
+            className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
+          />
+        )}
+      </AnimatePresence>
+
       {/* Curved background */}
       <svg
         viewBox="0 0 375 100"
