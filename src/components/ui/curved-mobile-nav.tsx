@@ -191,7 +191,8 @@ export function CurvedMobileNav() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ delay: 0.25 + i * 0.05, duration: 0.3 }}
-                  className="text-white/40 hover:text-white transition-colors duration-300"
+                  className="text-white/40 hover:text-white transition-colors duration-300 p-[14px] -m-[14px]"
+                  aria-label={s.label}
                 >
                   <s.icon />
                 </motion.a>
