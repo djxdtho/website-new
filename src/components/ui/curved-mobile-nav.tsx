@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Home, User, Package, Wrench, Calendar, X } from "lucide-react"
 
@@ -49,6 +49,7 @@ const CLOSED_HEIGHT = 100
 
 export function CurvedMobileNav() {
   const [open, setOpen] = useState(false)
+  const navRef = useRef<HTMLDivElement>(null)
 
   const scrollTo = (id: string) => {
     setOpen(false)
@@ -59,16 +60,28 @@ export function CurvedMobileNav() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" })
   }
 
+  useEffect(() => {
+    if (!open) return
+    const close = (e: Event) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpen(false)
+      }
+    }
+    const closeImmediate = () => {
+      setOpen(false)
+    }
+    document.addEventListener("scroll", closeImmediate, { passive: true })
+    document.addEventListener("touchstart", close, { passive: true })
+    document.addEventListener("pointerdown", close, { passive: true })
+    return () => {
+      document.removeEventListener("scroll", closeImmediate)
+      document.removeEventListener("touchstart", close)
+      document.removeEventListener("pointerdown", close)
+    }
+  }, [open])
+
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:hidden">
-      {/* Invisible overlay - closes menu when tapping outside the curve */}
-      {open && (
-        <div
-          className="fixed inset-0 md:hidden"
-          style={{ zIndex: -1 }}
-          onClick={() => setOpen(false)}
-        />
-      )}
+    <div ref={navRef} className="fixed bottom-0 left-0 right-0 z-50 flex justify-center md:hidden">
 
       {/* Expanding curve background */}
       <motion.div
