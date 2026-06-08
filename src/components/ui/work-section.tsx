@@ -138,7 +138,9 @@ export function WorkSection() {
       const rect = t.getBoundingClientRect()
       const vh = window.innerHeight
       const scrolled = vh - rect.top
-      const progress = Math.max(0, Math.min(1, scrolled / rect.height))
+      const raw = scrolled / rect.height
+      const deadZone = 0.1
+      const progress = Math.max(0, Math.min(1, (raw - deadZone) / (1 - deadZone)))
       const maxX = r.scrollWidth - window.innerWidth
       r.style.transform = `translate3d(${-progress * maxX}px, 0, 0)`
     }
