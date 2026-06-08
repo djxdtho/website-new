@@ -342,9 +342,9 @@ export function SplineSceneBasic() {
 
       {/* ─── ABOUT ─── */}
       <section id="about" className="relative z-10 min-h-dvh flex items-center py-24 px-6">
-        <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+        <div className="max-w-6xl mx-auto w-full grid md:grid-cols-2 gap-12 md:gap-20">
           {/* Left: visual */}
-          <Card data-grid-size="lg" className="md:sticky md:top-24 aspect-square flex items-center justify-center overflow-hidden">
+          <Card data-grid-size="lg" className="md:sticky md:top-24 aspect-square md:aspect-auto md:h-full flex items-center justify-center overflow-hidden">
             <motion.span
               className="text-9xl font-bold text-white/10 select-none font-display inline-block"
               initial={{ y: -120, opacity: 0 }}
@@ -372,7 +372,7 @@ export function SplineSceneBasic() {
           </Card>
 
           {/* Right: content */}
-          <div>
+          <div className="md:self-start">
               <span className="text-[10px] font-mono text-white/40 tracking-[1px] uppercase">
                 About
               </span>
