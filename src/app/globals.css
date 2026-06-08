@@ -18,7 +18,7 @@
 
   --animate-spotlight: spotlight 2s ease 0.5s 1 forwards;
   --animate-marquee: marquee 30s linear infinite;
-  --animate-float: float 10s ease-in-out infinite;
+  --animate-float: float 2s ease-in-out infinite;
   --animate-smoothMorph: smoothMorph 3s ease-in-out infinite;
 
   @keyframes spotlight {

@@ -365,7 +365,8 @@ export function SplineSceneBasic() {
                     height: `${20 + i * 8}px`,
                     top: `${12 + i * 10}%`,
                     left: `${12 + i * 10}%`,
-                    animationDelay: `${-i * 2.5}s`,
+                    animationDelay: `${-i * 0.5}s`,
+                    willChange: "transform",
                   }}
                 />
               ))}

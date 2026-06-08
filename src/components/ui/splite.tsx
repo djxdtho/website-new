@@ -20,18 +20,22 @@ function SplineFallback() {
               height: `${100 + i * 60}px`,
               top: `${5 + i * 8}%`,
               left: `${5 + i * 12}%`,
-              animationDelay: `${-i * 1.8}s`,
-              animationDuration: `${12 + i * 2}s`,
+              animationDelay: `${-i * 0.36}s`,
+              willChange: "transform",
             }}
           />
         ))}
-        {[...Array(12)].map((_, i) => (
+        {[
+          [12, 84], [68, 16], [34, 62], [82, 44], [21, 76],
+          [56, 28], [44, 92], [74, 52], [8, 38], [92, 68],
+          [38, 14], [62, 48],
+        ].map(([t, l], i) => (
           <div
             key={`dot-${i}`}
             className="absolute w-[2px] h-[2px] rounded-full bg-white/[0.06]"
             style={{
-              top: `${Math.random() * 90 + 5}%`,
-              left: `${Math.random() * 90 + 5}%`,
+              top: `${t}%`,
+              left: `${l}%`,
               animation: `pulse ${3 + i * 0.5}s ease-in-out infinite`,
               animationDelay: `${-i * 0.4}s`,
             }}
@@ -88,10 +92,10 @@ function SplineLoader({ scene, className }: SplineSceneProps) {
     let cancelled = false
     const timeout = setTimeout(() => {
       if (!cancelled && !Comp) {
-        console.log('[Spline] Loading timeout (10s)')
+        console.log('[Spline] Loading timeout (5s)')
         setTimedOut(true)
       }
-    }, 10000)
+    }, 5000)
     import('@splinetool/react-spline').then((mod) => {
       if (!cancelled) {
         console.log('[Spline] Import succeeded')
@@ -115,7 +119,7 @@ function SplineLoader({ scene, className }: SplineSceneProps) {
   if (!Comp) return <SplineFallback />
 
   return (
-    <div className={className}>
+    <div className={className} style={{ willChange: "transform" }}>
       <Comp scene={scene} />
     </div>
   )

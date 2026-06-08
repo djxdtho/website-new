@@ -1,7 +1,6 @@
 "use client"
 
-import { useRef } from "react"
-import { motion } from "framer-motion"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
 import { StarBorder } from "@/components/ui/star-border"
 import { CornerBrackets } from "@/components/ui/card"
@@ -53,6 +52,62 @@ const projects = [
 
 export function WorkSection() {
   const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([])
+  const rafId = useRef(0)
+
+  useEffect(() => {
+    const els = cardsRef.current.filter(Boolean) as HTMLDivElement[]
+    const trackEl = sectionRef.current?.querySelector("[data-scroll-track]") as HTMLElement | null
+    if (els.length === 0 || !trackEl) return
+    const track: HTMLElement = trackEl
+
+    const num = els.length
+    const STACK_GAP = 20
+    const ENTER_SCALE = 0.85
+
+    els.forEach((el, i) => {
+      el.style.willChange = "transform"
+      el.style.zIndex = String(i + 1)
+      el.style.opacity = "1"
+    })
+
+    function tick() {
+      rafId.current = 0
+      const rect = track.getBoundingClientRect()
+      const vh = window.innerHeight
+      const total = rect.height + vh
+      const scrolled = vh - rect.top
+      const progress = Math.max(0, Math.min(1, scrolled / total))
+
+      for (let i = 0; i < num; i++) {
+        const el = els[i]
+        const raw = progress * num - i
+        const p = Math.max(0, Math.min(1, raw))
+        const ep = 1 - Math.pow(1 - p, 3)
+
+        const targetY = i * STACK_GAP
+        const targetScale = 1 - i * 0.03
+        const y = (vh - 160) + (targetY - (vh - 160)) * ep
+        const scale = ENTER_SCALE + (targetScale - ENTER_SCALE) * ep
+
+        el.style.transform = `translate3d(0, ${y}px, 0) scale(${scale})`
+      }
+    }
+
+    function schedule() {
+      if (!rafId.current) rafId.current = requestAnimationFrame(tick)
+    }
+
+    tick()
+    window.addEventListener("scroll", schedule, { passive: true })
+    window.addEventListener("resize", schedule)
+
+    return () => {
+      if (rafId.current) cancelAnimationFrame(rafId.current)
+      window.removeEventListener("scroll", schedule)
+      window.removeEventListener("resize", schedule)
+    }
+  }, [])
 
   return (
     <section id="work" ref={sectionRef} className="relative z-10 bg-black" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }}>
@@ -77,91 +132,94 @@ export function WorkSection() {
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 w-full pb-24 space-y-6 md:space-y-8">
-        {projects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 0.5, delay: index * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-          >
-            <StarBorder
-              className="w-full sharp-corners"
-              color="rgba(255,255,255,0.08), rgba(255,255,255,0.01), rgba(255,255,255,0.08)"
-              speed={`${8 + index * 1.5}s`}
-            >
-              <div className="relative card-grid card-glow p-5 md:p-8 lg:p-10 border border-white/[0.06]">
-                <CornerBrackets />
-                <div className="flex items-start justify-between gap-4 mb-5 md:mb-8">
-                  <div className="flex items-start gap-3 md:gap-6">
-                    <span className="font-mono font-black text-4xl md:text-6xl lg:text-7xl leading-[0.8] text-foreground">
-                      {project.id}
-                    </span>
-                    <div className="pt-1 md:pt-2">
-                      <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-foreground">
-                        {project.name}
-                      </h3>
-                      <p className="text-[10px] md:text-xs text-white/35 font-mono mt-0.5 md:mt-1">
-                        {project.stack}
-                      </p>
+      <div data-scroll-track className="relative" style={{ height: `${projects.length * 60}vh` }}>
+        <div className="sticky top-[160px] h-[calc(100vh-160px)] overflow-hidden" style={{ willChange: "transform" }}>
+          <div className="max-w-5xl mx-auto px-6 w-full h-full relative">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                ref={(el) => { cardsRef.current[index] = el }}
+                className="absolute inset-x-0"
+                style={{ top: 0, transformOrigin: "top center" }}
+              >
+                <StarBorder
+                  className="w-full sharp-corners"
+                  color="rgba(255,255,255,0.08), rgba(255,255,255,0.01), rgba(255,255,255,0.08)"
+                  speed={`${8 + index * 1.5}s`}
+                >
+                  <div className="relative card-grid card-glow p-5 md:p-8 lg:p-10 border border-white/[0.06]">
+                    <CornerBrackets />
+                    <div className="flex items-start justify-between gap-4 mb-5 md:mb-8">
+                      <div className="flex items-start gap-3 md:gap-6">
+                        <span className="font-mono font-black text-4xl md:text-6xl lg:text-7xl leading-[0.8] text-foreground">
+                          {project.id}
+                        </span>
+                        <div className="pt-1 md:pt-2">
+                          <h3 className="font-display text-lg md:text-xl lg:text-2xl font-medium text-foreground">
+                            {project.name}
+                          </h3>
+                          <p className="text-[10px] md:text-xs text-white/35 font-mono mt-0.5 md:mt-1">
+                            {project.stack}
+                          </p>
+                        </div>
+                      </div>
+
+                      <StarBorder
+                        as="a"
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="live-btn-star shrink-0 hidden sm:inline-block"
+                        color="rgba(255,255,255,0.2), rgba(255,255,255,0.04), rgba(255,255,255,0.2)"
+                        speed="4s"
+                      >
+                        <span className="flex items-center gap-1.5 px-4 py-2 text-[10px] md:text-xs font-mono font-medium text-white tracking-[0.15em] uppercase">
+                          Live Project
+                          <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                          </svg>
+                        </span>
+                      </StarBorder>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-10 items-start">
+                      <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.06] bg-white/[0.02]">
+                        <Image
+                          src={project.src}
+                          alt={project.name}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                        />
+                      </div>
+                      <div className="flex flex-col gap-3 md:gap-4">
+                        <p className="text-sm md:text-base text-white/55 leading-relaxed">
+                          {project.description}
+                        </p>
+                        <StarBorder
+                          as="a"
+                          href={project.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="live-btn-star self-start sm:hidden"
+                          color="rgba(255,255,255,0.2), rgba(255,255,255,0.04), rgba(255,255,255,0.2)"
+                          speed="4s"
+                        >
+                          <span className="flex items-center gap-1.5 px-4 py-2 text-[10px] font-mono font-medium text-white tracking-[0.15em] uppercase">
+                            Live Project
+                            <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                            </svg>
+                          </span>
+                        </StarBorder>
+                      </div>
                     </div>
                   </div>
-
-                  <StarBorder
-                    as="a"
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="live-btn-star shrink-0 hidden sm:inline-block"
-                    color="rgba(255,255,255,0.2), rgba(255,255,255,0.04), rgba(255,255,255,0.2)"
-                    speed="4s"
-                  >
-                    <span className="flex items-center gap-1.5 px-4 py-2 text-[10px] md:text-xs font-mono font-medium text-white tracking-[0.15em] uppercase">
-                      Live Project
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                      </svg>
-                    </span>
-                  </StarBorder>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4 md:gap-8 lg:gap-10 items-start">
-                  <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-white/[0.06] bg-white/[0.02]">
-                    <Image
-                      src={project.src}
-                      alt={project.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-3 md:gap-4">
-                    <p className="text-sm md:text-base text-white/55 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <StarBorder
-                      as="a"
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="live-btn-star self-start sm:hidden"
-                      color="rgba(255,255,255,0.2), rgba(255,255,255,0.04), rgba(255,255,255,0.2)"
-                      speed="4s"
-                    >
-                      <span className="flex items-center gap-1.5 px-4 py-2 text-[10px] font-mono font-medium text-white tracking-[0.15em] uppercase">
-                        Live Project
-                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                      </span>
-                    </StarBorder>
-                  </div>
-                </div>
+                </StarBorder>
               </div>
-            </StarBorder>
-          </motion.div>
-        ))}
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   )
