@@ -48,6 +48,14 @@ const projects = [
     description: "Futuristic digital clock with 10 themes, particles, 12/24h modes, and PWA support.",
     url: "https://djxdtho.github.io/digital-clock/",
   },
+  {
+    id: "006",
+    src: `${BASE}/portfolio/card6.png`,
+    name: "PinVid",
+    stack: "Next.js / TS / Tailwind",
+    description: "Pinterest video downloader — paste any Pinterest video link and download it instantly with one click.",
+    url: "https://pinterest-video-downloader-seven.vercel.app",
+  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
