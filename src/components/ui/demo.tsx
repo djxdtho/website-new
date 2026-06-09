@@ -181,20 +181,24 @@ export function SplineSceneBasic() {
     if (!loaded) return
     const el = overlayRef.current
     if (!el) return
-    const duration = 2000
-    const ringWidth = 1.5
+    const startVal = 0
+    const endVal = 100
+    const duration = 800
     let startTime: number | null = null
     let raf: number
-    let disposed = false
+
+    const gradient = (val: number) =>
+      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
 
     const step = (now: number) => {
-      if (disposed) return
       if (!startTime) startTime = now
       const t = Math.min((now - startTime) / duration, 1)
+      // Cubic bezier [0.25, 0.1, 0.25, 1] approximation
       const eased = 1 - Math.pow(1 - t, 3)
-      const val = eased * 100
-      const endRing = Math.min(val + ringWidth, 100)
-      el.style.background = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%, white ${endRing}%, black ${endRing}%)`
+      const val = startVal + (endVal - startVal) * eased
+      const g = gradient(val)
+      el.style.maskImage = g
+      el.style.webkitMaskImage = g
       if (t < 1) {
         raf = requestAnimationFrame(step)
       } else {
@@ -202,9 +206,10 @@ export function SplineSceneBasic() {
       }
     }
 
-    el.style.background = `radial-gradient(circle at 50% 50%, transparent 0%, transparent 0%, white 0%, white ${ringWidth}%, black ${ringWidth}%)`
+    el.style.maskImage = gradient(0)
+    el.style.webkitMaskImage = gradient(0)
     raf = requestAnimationFrame(step)
-    return () => { disposed = true; cancelAnimationFrame(raf) }
+    return () => cancelAnimationFrame(raf)
   }, [loaded])
 
   const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing", "contact"]
@@ -255,7 +260,7 @@ export function SplineSceneBasic() {
       {!revealed && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
         >
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
