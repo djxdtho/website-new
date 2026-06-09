@@ -181,24 +181,30 @@ export function SplineSceneBasic() {
     if (!loaded) return
     const el = overlayRef.current
     if (!el) return
-    const startVal = 0
-    const endVal = 100
-    const duration = 800
+    const duration = 2000
+    const phase1Split = 0.4
     let startTime: number | null = null
     let raf: number
-
-    const gradient = (val: number) =>
-      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
 
     const step = (now: number) => {
       if (!startTime) startTime = now
       const t = Math.min((now - startTime) / duration, 1)
-      // Cubic bezier [0.25, 0.1, 0.25, 1] approximation
       const eased = 1 - Math.pow(1 - t, 3)
-      const val = startVal + (endVal - startVal) * eased
-      const g = gradient(val)
-      el.style.maskImage = g
-      el.style.webkitMaskImage = g
+
+      if (eased <= phase1Split) {
+        const p = eased / phase1Split
+        const val = p * 100
+        el.style.background = `radial-gradient(circle at 50% 50%, white 0%, white ${val}%, black ${val}%)`
+        el.style.maskImage = ''
+        el.style.webkitMaskImage = ''
+      } else {
+        const p = (eased - phase1Split) / (1 - phase1Split)
+        const val = p * 100
+        el.style.background = 'white'
+        el.style.maskImage = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%)`
+        el.style.webkitMaskImage = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%)`
+      }
+
       if (t < 1) {
         raf = requestAnimationFrame(step)
       } else {
@@ -206,8 +212,9 @@ export function SplineSceneBasic() {
       }
     }
 
-    el.style.maskImage = gradient(0)
-    el.style.webkitMaskImage = gradient(0)
+    el.style.background = 'black'
+    el.style.maskImage = ''
+    el.style.webkitMaskImage = ''
     raf = requestAnimationFrame(step)
     return () => cancelAnimationFrame(raf)
   }, [loaded])
@@ -260,7 +267,7 @@ export function SplineSceneBasic() {
       {!revealed && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden bg-black"
         >
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
