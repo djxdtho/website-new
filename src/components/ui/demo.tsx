@@ -8,7 +8,7 @@ import { ProtocolCard } from "@/components/ui/protocol-card"
 import { ToolkitSection } from "@/components/ui/toolkit-section"
 import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
-import { motion, animate, useScroll, useMotionValueEvent } from "framer-motion"
+import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
 import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare, HelpCircle, Phone } from "lucide-react"
 import { ProcessTimeline } from "@/components/ui/process-timeline"
@@ -181,17 +181,35 @@ export function SplineSceneBasic() {
     if (!loaded) return
     const el = overlayRef.current
     if (!el) return
-    const controls = animate(0, 100, {
-      duration: 0.8,
-      ease: [0.25, 0.1, 0.25, 1],
-      onUpdate: (val) => {
-        const gradient = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
-        el.style.maskImage = gradient
-        el.style.webkitMaskImage = gradient
-      },
-      onComplete: () => setRevealed(true),
-    })
-    return () => controls.stop()
+    const startVal = 0
+    const endVal = 100
+    const duration = 800
+    let startTime: number | null = null
+    let raf: number
+
+    const gradient = (val: number) =>
+      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
+
+    const step = (now: number) => {
+      if (!startTime) startTime = now
+      const t = Math.min((now - startTime) / duration, 1)
+      // Cubic bezier [0.25, 0.1, 0.25, 1] approximation
+      const eased = 1 - Math.pow(1 - t, 3)
+      const val = startVal + (endVal - startVal) * eased
+      const g = gradient(val)
+      el.style.maskImage = g
+      el.style.webkitMaskImage = g
+      if (t < 1) {
+        raf = requestAnimationFrame(step)
+      } else {
+        setRevealed(true)
+      }
+    }
+
+    el.style.maskImage = gradient(0)
+    el.style.webkitMaskImage = gradient(0)
+    raf = requestAnimationFrame(step)
+    return () => cancelAnimationFrame(raf)
   }, [loaded])
 
   const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing", "contact"]
