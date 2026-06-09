@@ -8,7 +8,7 @@ import { ProtocolCard } from "@/components/ui/protocol-card"
 import { ToolkitSection } from "@/components/ui/toolkit-section"
 import { ServicesSection } from "@/components/ui/services-section"
 import { MorphingSpinner } from "@/components/ui/morphing-spinner"
-import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion"
+import { motion, animate, useScroll, useMotionValueEvent } from "framer-motion"
 import { ExpandableTabs } from "@/components/ui/expandable-tabs"
 import { User, Package, Wrench, Map, DollarSign, Briefcase, MessageSquare, HelpCircle, Phone } from "lucide-react"
 import { ProcessTimeline } from "@/components/ui/process-timeline"
@@ -157,8 +157,10 @@ function SocialIcons() {
 
 export function SplineSceneBasic() {
   const [loaded, setLoaded] = useState(false)
+  const [revealed, setRevealed] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState<string | null>(null)
+  const overlayRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
 
   const scrollRaf = useRef(0)
@@ -174,6 +176,23 @@ export function SplineSceneBasic() {
     const t = setTimeout(() => setLoaded(true), 400)
     return () => clearTimeout(t)
   }, [])
+
+  useEffect(() => {
+    if (!loaded) return
+    const el = overlayRef.current
+    if (!el) return
+    const controls = animate(0, 100, {
+      duration: 0.8,
+      ease: [0.25, 0.1, 0.25, 1],
+      onUpdate: (val) => {
+        const gradient = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
+        el.style.maskImage = gradient
+        el.style.webkitMaskImage = gradient
+      },
+      onComplete: () => setRevealed(true),
+    })
+    return () => controls.stop()
+  }, [loaded])
 
   const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing", "contact"]
 
@@ -220,21 +239,24 @@ export function SplineSceneBasic() {
 
   return (
     <>
-      <AnimatePresence>
-        {!loaded && (
+      {!revealed && (
+        <div
+          ref={overlayRef}
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+        >
           <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={loaded ? { opacity: 0, scale: 1.4 } : {}}
+            transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+            className="flex flex-col items-center"
           >
             <MorphingSpinner size="lg" />
             <p className="mt-6 text-sm font-mono text-white/40 tracking-[0.2em] uppercase">
               Loading
             </p>
           </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
 
       {/* ─── STICKY NAVBAR ─── */}
       <motion.nav
