@@ -181,24 +181,20 @@ export function SplineSceneBasic() {
     if (!loaded) return
     const el = overlayRef.current
     if (!el) return
-    const startVal = 0
-    const endVal = 100
-    const duration = 1600
+    const duration = 2000
+    const ringWidth = 1.5
     let startTime: number | null = null
     let raf: number
-
-    const gradient = (val: number) =>
-      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%)`
+    let disposed = false
 
     const step = (now: number) => {
+      if (disposed) return
       if (!startTime) startTime = now
       const t = Math.min((now - startTime) / duration, 1)
-      // Cubic bezier [0.25, 0.1, 0.25, 1] approximation
       const eased = 1 - Math.pow(1 - t, 3)
-      const val = startVal + (endVal - startVal) * eased
-      const g = gradient(val)
-      el.style.maskImage = g
-      el.style.webkitMaskImage = g
+      const val = eased * 100
+      const endRing = Math.min(val + ringWidth, 100)
+      el.style.background = `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%, white ${endRing}%, black ${endRing}%)`
       if (t < 1) {
         raf = requestAnimationFrame(step)
       } else {
@@ -206,10 +202,9 @@ export function SplineSceneBasic() {
       }
     }
 
-    el.style.maskImage = gradient(0)
-    el.style.webkitMaskImage = gradient(0)
+    el.style.background = `radial-gradient(circle at 50% 50%, transparent 0%, transparent 0%, white 0%, white ${ringWidth}%, black ${ringWidth}%)`
     raf = requestAnimationFrame(step)
-    return () => cancelAnimationFrame(raf)
+    return () => { disposed = true; cancelAnimationFrame(raf) }
   }, [loaded])
 
   const sectionIds = ["about", "services", "toolkit", "process", "work", "testimonials", "faq", "pricing", "contact"]
@@ -260,7 +255,7 @@ export function SplineSceneBasic() {
       {!revealed && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center overflow-hidden"
         >
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
@@ -268,10 +263,8 @@ export function SplineSceneBasic() {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="flex flex-col items-center"
           >
-            <div className="[&_div]:!bg-black/80">
-              <MorphingSpinner size="lg" />
-            </div>
-            <p className="mt-6 text-sm font-mono text-black/40 tracking-[0.2em] uppercase">
+            <MorphingSpinner size="lg" />
+            <p className="mt-6 text-sm font-mono text-white/40 tracking-[0.2em] uppercase">
               Loading
             </p>
           </motion.div>
