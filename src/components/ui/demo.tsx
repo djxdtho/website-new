@@ -183,12 +183,12 @@ export function SplineSceneBasic() {
     if (!el) return
     const startVal = 0
     const endVal = 100
-    const duration = 800
+    const duration = 1600
     let startTime: number | null = null
     let raf: number
 
     const gradient = (val: number) =>
-      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, black ${val}%)`
+      `radial-gradient(circle at 50% 50%, transparent 0%, transparent ${val}%, white ${val}%)`
 
     const step = (now: number) => {
       if (!startTime) startTime = now
@@ -260,7 +260,7 @@ export function SplineSceneBasic() {
       {!revealed && (
         <div
           ref={overlayRef}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black"
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white"
         >
           <motion.div
             initial={{ opacity: 1, scale: 1 }}
@@ -268,8 +268,10 @@ export function SplineSceneBasic() {
             transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
             className="flex flex-col items-center"
           >
-            <MorphingSpinner size="lg" />
-            <p className="mt-6 text-sm font-mono text-white/40 tracking-[0.2em] uppercase">
+            <div className="[&_div]:!bg-black/80">
+              <MorphingSpinner size="lg" />
+            </div>
+            <p className="mt-6 text-sm font-mono text-black/40 tracking-[0.2em] uppercase">
               Loading
             </p>
           </motion.div>
