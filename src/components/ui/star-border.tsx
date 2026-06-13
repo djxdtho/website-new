@@ -5,7 +5,7 @@ interface StarBorderProps {
   className?: string
   color?: string
   speed?: string
-  as?: React.ElementType
+  as?: React.ElementType<any>
   href?: string
   target?: string
   rel?: string
@@ -20,10 +20,10 @@ export function StarBorder({
   as: Component = "div",
   ...props
 }: StarBorderProps) {
+  const El = Component as React.ComponentType<{ className?: string; children?: React.ReactNode }>
   return (
-    <Component
+    <El
       className={`star-border-container ${className}`}
-      {...props}
     >
       <div
         className="border-gradient-full"
@@ -33,6 +33,6 @@ export function StarBorder({
         }}
       />
       <div className="inner-content">{children}</div>
-    </Component>
+    </El>
   )
 }
