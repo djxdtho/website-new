@@ -96,6 +96,14 @@ const projects = [
     description: "[$300 Tier] Full e-commerce coffee shop with product catalog, shopping cart, checkout flow, order management, and brand storytelling. For growing businesses ready to sell online.",
     url: "https://djxdtho.github.io/website-new/shop",
   },
+  {
+    id: "012",
+    src: `${BASE}/portfolio/card12.png`,
+    name: "Birch & Bean — Premium",
+    stack: "Next.js / TS / Tailwind / Framer Motion",
+    description: "[$900 Tier] Full-featured roastery admin panel with Dashboard, Products CRUD (name, price, roast, origin, notes, cup sizes, stock), Order management with status workflow, Employee management (name, age, address, role, salary, document uploads), Customer profiles with order history, Inventory with low-stock alerts, and Settings. Complete business operations suite.",
+    url: "https://djxdtho.github.io/website-new/coffee/admin",
+  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
