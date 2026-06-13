@@ -1,11 +1,11 @@
 "use client"
 
-import { useState, useMemo, useCallback } from "react"
+import { useState, useMemo, useCallback, useRef } from "react"
 import {
   LayoutDashboard, ShoppingBag, Package, Users, UserCheck, BarChart3, Settings,
   Plus, Search, Edit2, Trash2, X, Check, ChevronDown, ChevronUp, MoreHorizontal,
   Star, Filter, ArrowUpDown, Upload, Download, Eye, AlertTriangle,
-  Clock, Truck, Flame, Box, BookOpen,
+  Clock, Truck, Flame, Box, BookOpen, ImageIcon,
 } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -116,6 +116,65 @@ function ConfirmDialog({ open, title, message, onConfirm, onCancel }: { open: bo
         </motion.div>
       )}
     </AnimatePresence>
+  )
+}
+
+// ─── Select ───
+
+function Select({ value, onChange, options, className }: { value: string; onChange: (v: string) => void; options: { value: string; label: string }[]; className?: string }) {
+  return (
+    <div className={`relative ${className || ""}`}>
+      <select value={value} onChange={e => onChange(e.target.value)}
+        className="appearance-none w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 pr-8 text-sm text-[#F5EDE0] focus:outline-none focus:border-[#C4956A]/30 transition-colors cursor-pointer"
+      >
+        {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
+      </select>
+      <ChevronDown size={12} className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-white/30" />
+    </div>
+  )
+}
+
+// ─── Image Upload ───
+
+function ImageUpload({ value, onChange }: { value: string; onChange: (url: string) => void }) {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleFile = useCallback((file: File) => {
+    if (!file.type.startsWith("image/")) return
+    const reader = new FileReader()
+    reader.onload = e => onChange(e.target?.result as string || "")
+    reader.readAsDataURL(file)
+  }, [onChange])
+
+  return (
+    <div className="space-y-3">
+      {value ? (
+        <div className="relative rounded-lg overflow-hidden border border-white/[0.08] group">
+          <img src={value} alt="Preview" className="w-full aspect-[3/2] object-cover" />
+          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+            <button type="button" onClick={() => inputRef.current?.click()} className="px-3 py-1.5 bg-white/10 border border-white/20 rounded-lg text-[10px] text-white font-mono hover:bg-white/20 transition-colors">
+              Change
+            </button>
+            <button type="button" onClick={() => onChange("")} className="px-3 py-1.5 bg-red-500/20 border border-red-500/30 rounded-lg text-[10px] text-red-300 font-mono hover:bg-red-500/30 transition-colors">
+              Remove
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div
+          onClick={() => inputRef.current?.click()}
+          onDragOver={e => { e.preventDefault(); e.stopPropagation() }}
+          onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) handleFile(f) }}
+          className="border border-dashed border-white/[0.08] rounded-lg p-6 text-center cursor-pointer hover:border-[#C4956A]/30 hover:bg-white/[0.02] transition-all group"
+        >
+          <ImageIcon size={20} className="mx-auto text-white/20 group-hover:text-[#C4956A]/60 transition-colors mb-2" />
+          <p className="text-xs text-white/30 group-hover:text-white/50 transition-colors">Drop an image or click to upload</p>
+          <p className="text-[10px] text-white/20 mt-1">PNG, JPG, WebP — or paste a URL below</p>
+        </div>
+      )}
+      <input ref={inputRef} type="file" accept="image/*" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f) }} className="hidden" />
+      <input value={value} onChange={e => onChange(e.target.value)} placeholder="Or paste image URL..." className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-xs text-[#F5EDE0] placeholder:text-white/20 focus:outline-none focus:border-[#C4956A]/30 transition-colors" />
+    </div>
   )
 }
 
@@ -331,8 +390,14 @@ function ProductsSection({ products, setProducts, onToast }: { products: Product
                 <tr key={p.id} className="border-b border-white/[0.04] hover:bg-white/[0.02] transition-colors">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-white/20 text-[10px]">
-                        {p.name.slice(0, 2)}
+                      <div className="w-10 h-10 rounded-lg border border-white/[0.06] overflow-hidden bg-white/[0.04] flex-shrink-0">
+                        {p.image ? (
+                          <img src={p.image} alt={p.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-white/20 text-[10px]">
+                            {p.name.slice(0, 2)}
+                          </div>
+                        )}
                       </div>
                       <div>
                         <p className="text-[#F5EDE0] text-sm font-medium">{p.name}</p>
@@ -406,9 +471,7 @@ function ProductForm({ product, onSave, onClose }: { product: Product; onSave: (
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Roast Level</label>
-              <select value={form.roast} onChange={e => set("roast", e.target.value as RoastLevel)} className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-[#F5EDE0] focus:outline-none focus:border-[#C4956A]/30">
-                {(["Light", "Medium-Light", "Medium", "Medium-Dark", "Dark"] as const).map(r => <option key={r} value={r}>{r}</option>)}
-              </select>
+              <Select value={form.roast} onChange={v => set("roast", v as RoastLevel)} options={(["Light", "Medium-Light", "Medium", "Medium-Dark", "Dark"] as const).map(r => ({ value: r, label: r }))} />
             </div>
             <div className="col-span-2">
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Origin *</label>
@@ -417,6 +480,10 @@ function ProductForm({ product, onSave, onClose }: { product: Product; onSave: (
             <div className="col-span-2">
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Tasting Notes</label>
               <input value={form.notes} onChange={e => set("notes", e.target.value)} placeholder="Flavor, Aroma, Finish" className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-[#F5EDE0] placeholder:text-white/20 focus:outline-none focus:border-[#C4956A]/30" />
+            </div>
+            <div className="col-span-2">
+              <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Product Image</label>
+              <ImageUpload value={form.image} onChange={v => set("image", v)} />
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Stock</label>
@@ -707,9 +774,7 @@ function EmployeeForm({ employee, roles, onSave, onClose }: { employee: Employee
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Role</label>
-              <select value={form.role} onChange={e => set("role", e.target.value as EmployeeRole)} className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-[#F5EDE0] focus:outline-none focus:border-[#C4956A]/30">
-                {roles.map(r => <option key={r} value={r}>{r}</option>)}
-              </select>
+              <Select value={form.role} onChange={v => set("role", v as EmployeeRole)} options={roles.map(r => ({ value: r, label: r }))} />
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Annual Salary *</label>
@@ -958,9 +1023,7 @@ function SettingsSection({ onToast }: { onToast: (m: string) => void }) {
           <div className="grid grid-cols-3 gap-4">
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Currency</label>
-              <select value={form.currency} onChange={e => set("currency", e.target.value)} className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-[#F5EDE0] focus:outline-none">
-                <option>USD</option><option>EUR</option><option>GBP</option>
-              </select>
+              <Select value={form.currency} onChange={v => set("currency", v)} options={[{ value: "USD", label: "USD" }, { value: "EUR", label: "EUR" }, { value: "GBP", label: "GBP" }]} />
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Tax Rate (%)</label>
@@ -985,9 +1048,7 @@ function SettingsSection({ onToast }: { onToast: (m: string) => void }) {
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Timezone</label>
-              <select value={form.timezone} onChange={e => set("timezone", e.target.value)} className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-[#F5EDE0] focus:outline-none">
-                <option>America/Los_Angeles</option><option>America/New_York</option><option>America/Chicago</option><option>Europe/London</option>
-              </select>
+              <Select value={form.timezone} onChange={v => set("timezone", v)} options={[{ value: "America/Los_Angeles", label: "America/Los_Angeles" }, { value: "America/New_York", label: "America/New_York" }, { value: "America/Chicago", label: "America/Chicago" }, { value: "Europe/London", label: "Europe/London" }]} />
             </div>
             <div>
               <label className="text-[10px] font-mono text-white/40 tracking-wider uppercase block mb-1.5">Low Stock Threshold</label>
