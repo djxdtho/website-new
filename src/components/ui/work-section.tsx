@@ -72,6 +72,30 @@ const projects = [
     description: "Who Wants to Be a Millionaire — full 15-tier trivia game with Fastest Finger, lifelines (50:50/Phone/Audience), circular timer, keyboard shortcuts, Supabase auth & leaderboard.",
     url: "https://djxdtho.github.io/millionaire/",
   },
+  {
+    id: "009",
+    src: `${BASE}/portfolio/card9.png`,
+    name: "KAY-FITS",
+    stack: "React / Vite / Tailwind / Supabase",
+    description: "Streetwear fashion marketplace with product catalog, cart, checkout, Supabase auth, wishlist, and admin panel — 24 products across 5 categories.",
+    url: "https://djxdtho.github.io/kay-fits/",
+  },
+  {
+    id: "010",
+    src: `${BASE}/portfolio/card10.png`,
+    name: "Birch & Bean — Starter",
+    stack: "Next.js / TS / Tailwind",
+    description: "[$120 Tier] Single-page artisan coffee roaster landing page with hero, roast showcase, story section, brew guides, and contact form. Perfect for a small business just getting online.",
+    url: "https://djxdtho.github.io/website-new/coffee",
+  },
+  {
+    id: "011",
+    src: `${BASE}/portfolio/card11.png`,
+    name: "Birch & Bean — Professional",
+    stack: "Next.js / TS / Tailwind / Framer Motion",
+    description: "[$300 Tier] Full e-commerce coffee shop with product catalog, shopping cart, checkout flow, order management, and brand storytelling. For growing businesses ready to sell online.",
+    url: "https://djxdtho.github.io/website-new/shop",
+  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
