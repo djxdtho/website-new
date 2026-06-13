@@ -96,14 +96,6 @@ const projects = [
     description: "[$300 Tier] Full e-commerce coffee shop with product catalog, shopping cart, checkout flow, order management, and brand storytelling. For growing businesses ready to sell online.",
     url: "https://djxdtho.github.io/website-new/shop",
   },
-  {
-    id: "012",
-    src: `${BASE}/portfolio/card12.png`,
-    name: "Birch & Bean — Premium",
-    stack: "Next.js / TS / Tailwind / Framer Motion",
-    description: "[$900 Tier] Multi-roaster marketplace connecting 5 independent craft roasters from around the world — unified discovery, search, roast/origin filters, roaster detail views, and shared cart. One checkout, endless discovery.",
-    url: "https://djxdtho.github.io/website-new/coffee/premium",
-  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
