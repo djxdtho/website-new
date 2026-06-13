@@ -56,6 +56,22 @@ const projects = [
     description: "Pinterest video downloader — paste any Pinterest video link and download it instantly with one click.",
     url: "https://pinterest-video-downloader-seven.vercel.app",
   },
+  {
+    id: "007",
+    src: `${BASE}/portfolio/card7.png`,
+    name: "AA Elements",
+    stack: "Next.js / TS / Framer Motion / Spline",
+    description: "Immersive portfolio with 3D Spline scenes, theme system (Aurora/Venom/Inferno/Twilight/Arctic), scroll-driven animations, and interactive timeline.",
+    url: "https://djxdtho.github.io/website-new/",
+  },
+  {
+    id: "008",
+    src: `${BASE}/portfolio/card8.png`,
+    name: "Millionaire",
+    stack: "React / TS / Supabase / Vite",
+    description: "Who Wants to Be a Millionaire — full 15-tier trivia game with Fastest Finger, lifelines (50:50/Phone/Audience), circular timer, keyboard shortcuts, Supabase auth & leaderboard.",
+    url: "https://djxdtho.github.io/millionaire/",
+  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
