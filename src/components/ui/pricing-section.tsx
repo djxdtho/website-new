@@ -88,7 +88,7 @@ export function PricingSection() {
 
   return (
     <section id="pricing" ref={sectionRef} className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 hidden md:block">
         <FallingPattern
           color="rgba(255,255,255,0.08)"
           backgroundColor="transparent"
