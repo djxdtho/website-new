@@ -1,9 +1,10 @@
 "use client"
 
+import { useRef, useState, useEffect } from "react"
 import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { Check, Star, HelpCircle } from "lucide-react"
 
 
@@ -65,8 +66,27 @@ const plans = [
 ]
 
 export function PricingSection() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  })
+
+  const [isMd, setIsMd] = useState(true)
+  useEffect(() => {
+    setIsMd(window.innerWidth >= 768)
+    const h = () => setIsMd(window.innerWidth >= 768)
+    window.addEventListener("resize", h)
+    return () => window.removeEventListener("resize", h)
+  }, [])
+
+  const leftX = useTransform(scrollYProgress, [0, 0.4], [-50, 30])
+  const rightX = useTransform(scrollYProgress, [0, 0.4], [50, -30])
+  const middleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.08])
+  const sideScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.9])
+
   return (
-    <section id="pricing" className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
+    <section id="pricing" ref={sectionRef} className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
       <div className="relative z-[1] max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -96,6 +116,10 @@ export function PricingSection() {
             <motion.div
               key={index}
               className="flex-1 max-w-sm relative will-change-transform"
+              style={isMd ? {
+                x: index === 0 ? leftX : index === 2 ? rightX : 0,
+                scale: index === 1 ? middleScale : index === 0 || index === 2 ? sideScale : 1,
+              } : {}}
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
