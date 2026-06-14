@@ -1,12 +1,11 @@
 "use client"
 
-import { useRef, useState, useEffect } from "react"
 import { buttonVariants } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import { Check, Star, HelpCircle } from "lucide-react"
-import { FallingPattern } from "@/components/ui/falling-pattern"
+
 
 
 const plans = [
@@ -66,46 +65,15 @@ const plans = [
 ]
 
 export function PricingSection() {
-  const sectionRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  })
-
-  const [isMd, setIsMd] = useState(true)
-  useEffect(() => {
-    setIsMd(window.innerWidth >= 768)
-    const h = () => setIsMd(window.innerWidth >= 768)
-    window.addEventListener("resize", h)
-    return () => window.removeEventListener("resize", h)
-  }, [])
-
-  const leftX = useTransform(scrollYProgress, [0, 0.4], [-50, 30])
-  const rightX = useTransform(scrollYProgress, [0, 0.4], [50, -30])
-  const middleScale = useTransform(scrollYProgress, [0, 0.4], [1, 1.08])
-  const sideScale = useTransform(scrollYProgress, [0, 0.4], [1, 0.9])
-  const sideOpacity = useTransform(scrollYProgress, [0, 0.4], [1, 0.85])
-  const middleZ = useTransform(scrollYProgress, [0, 0.4], [1, 10])
-
   return (
-    <section id="pricing" ref={sectionRef} className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
-      <div className="absolute inset-0 z-0">
-        <FallingPattern
-          color="rgba(255,255,255,0.08)"
-          backgroundColor="transparent"
-          duration={200}
-          blurIntensity="0.3em"
-          density={3}
-          className="h-full"
-        />
-      </div>
+    <section id="pricing" className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
       <div className="relative z-[1] max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12"
+          className="mb-12 will-change-transform"
         >
           <div className="flex items-center gap-3 mb-4">
             <span className="font-mono text-[10px] text-white/30 tracking-[1px]">
@@ -127,13 +95,7 @@ export function PricingSection() {
           {plans.map((plan, index) => (
             <motion.div
               key={index}
-              className="flex-1 max-w-sm relative"
-              style={isMd ? {
-                x: index === 0 ? leftX : index === 2 ? rightX : 0,
-                scale: index === 1 ? middleScale : index === 0 || index === 2 ? sideScale : 1,
-                opacity: index === 0 || index === 2 ? sideOpacity : 1,
-                zIndex: index === 1 ? middleZ : 0,
-              } : {}}
+              className="flex-1 max-w-sm relative will-change-transform"
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
