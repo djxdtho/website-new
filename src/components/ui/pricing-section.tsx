@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Check, Star, HelpCircle } from "lucide-react"
+import { FallingPattern } from "@/components/ui/falling-pattern"
 
 
 
@@ -87,6 +88,16 @@ export function PricingSection() {
 
   return (
     <section id="pricing" ref={sectionRef} className="relative z-10 py-24 md:py-32 px-6 overflow-hidden">
+      <div className="absolute inset-0 z-0">
+        <FallingPattern
+          color="rgba(255,255,255,0.08)"
+          backgroundColor="transparent"
+          duration={200}
+          blurIntensity="0.3em"
+          density={3}
+          className="h-full"
+        />
+      </div>
       <div className="relative z-[1] max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
