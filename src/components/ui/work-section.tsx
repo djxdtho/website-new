@@ -104,6 +104,14 @@ const projects = [
     description: "[$900 Tier] Full-featured roastery admin panel with Dashboard, Products CRUD (name, price, roast, origin, notes, cup sizes, stock), Order management with status workflow, Employee management (name, age, address, role, salary, document uploads), Customer profiles with order history, Inventory with low-stock alerts, and Settings. Complete business operations suite.",
     url: "https://djxdtho.github.io/website-new/coffee/admin",
   },
+  {
+    id: "013",
+    src: `${BASE}/portfolio/card13.png`,
+    name: "Ironclad Construction",
+    stack: "Next.js / Tailwind v4 / GSAP / Framer Motion",
+    description: "Industrial-grade construction landing page with parallax hero, animated counters, GSAP scroll effects, bento-grid projects, and mobile-first responsive design.",
+    url: "https://github.com/djxdtho/construction-site",
+  },
 ]
 
 function ProjectCard({ project, idx }: { project: (typeof projects)[number]; idx: number }) {
