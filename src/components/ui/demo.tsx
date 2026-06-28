@@ -18,6 +18,7 @@ import { WorkSection } from "@/components/ui/work-section"
 import { Testimonial } from "@/components/ui/design-testimonial"
 import { FAQSection } from "@/components/ui/faq-section"
 import { ContactSection } from "@/components/ui/contact-section"
+import Cubes from "@/components/ui/Cubes"
 
 const phrases = [
   "Building interactive digital experiences",
@@ -524,6 +525,31 @@ export function SplineSceneBasic() {
 
       {/* ─── PRICING ─── */}
       <PricingSection />
+
+      {/* ─── CUBES ─── */}
+      <section className="relative min-h-screen flex items-center justify-center bg-[#0a0a0a] overflow-hidden">
+        <div className="absolute inset-0 z-10 flex items-center justify-center opacity-80">
+          <Cubes
+            gridSize={12}
+            maxAngle={170}
+            radius={2}
+            borderStyle="2px dotted #fff"
+            faceColor="#000000"
+            rippleColor="#ffffff"
+            rippleSpeed={1.5}
+            autoAnimate={true}
+            rippleOnClick={true}
+          />
+        </div>
+        <div className="relative z-0 text-center px-6">
+          <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-4">
+            Interactive Experience
+          </h2>
+          <p className="text-lg text-white/60 max-w-md mx-auto">
+            Move your cursor or tap to explore the cube grid.
+          </p>
+        </div>
+      </section>
 
       {/* ─── CONTACT ─── */}
       <ContactSection />
