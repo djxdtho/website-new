@@ -225,7 +225,7 @@ export function WorkSection() {
   }, [])
 
   return (
-    <section id="work" ref={sectionRef} className="relative z-10 bg-black" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.08) 1.5px, transparent 1.5px)", backgroundSize: "32px 32px" }}>
+    <section id="work" ref={sectionRef} className="relative z-10 bg-black" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 5v22M5 16h22' stroke='rgba(255,255,255,0.08)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E")`, backgroundSize: "32px 32px" }}>
       <div className="mb-4 px-6 max-w-5xl mx-auto w-full pt-16 md:pt-24">
         <span className="text-[10px] font-mono text-white/40 tracking-[1px] uppercase">
           [ 05 ]  Projects
